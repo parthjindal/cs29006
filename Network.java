@@ -44,9 +44,10 @@ abstract class Node {
     }
 
     public void insertLink(Node x, String relation) {
-        if (checkLinkSanity(x, relation) == false)
+        if (checkLinkSanity(x, relation) == false) {
+            System.out.println();
             return;
-        else
+        } else
             link.put(x, relation);
         return;
     }
@@ -204,6 +205,7 @@ public class Network {
             n.link.remove(currNode);
         });
         Nodes.remove(key);
+        System.out.println("Node Deleted");
     }
 
     public void searchNode(Scanner obj) {
@@ -248,7 +250,8 @@ public class Network {
 
         System.out.println("Links:");
         for (Map.Entry<Node, String> linkEntry : Nodes.get(x).link.entrySet()) {
-            System.out.println(Nodes.get(x).getName() + "--" + linkEntry.getValue() + "--" + linkEntry.getKey().name);
+            System.out.println(Nodes.get(x).getName() + "--" + linkEntry.getValue() + "--"
+                    + linkEntry.getKey().getName() + ", ID: " + linkEntry.getKey().getID());
         }
     }
 
@@ -277,16 +280,16 @@ public class Network {
 
     }
 
-    public void createLinkForNodes(Scanner obj){
+    public void createLinkForNodes(Scanner obj) {
         System.out.println("Enter Node 1 ID");
         int x = Integer.parseInt(obj.nextLine());
         System.out.println("Enter Node 2 ID");
         int y = Integer.parseInt(obj.nextLine());
         System.out.println("Enter Relation");
-        String relation  = obj.nextLine();
-        
-        Nodes.get(x).insertLink(Nodes.get(y),relation);
-        Nodes.get(y).insertLink(Nodes.get(x),relation);
+        String relation = obj.nextLine();
+
+        Nodes.get(x).insertLink(Nodes.get(y), relation);
+        Nodes.get(y).insertLink(Nodes.get(x), relation);
 
     }
 
