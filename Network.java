@@ -43,31 +43,26 @@ abstract class Node {
         name = obj.nextLine();
     }
 
-    public void insertLink(Node x, String relation) {
+    public boolean insertLink(Node x, String relation) {
         if (checkLinkSanity(x, relation) == false) {
-            System.out.println();
-            return;
-        } else
-            link.put(x, relation);
-        return;
+            return false;
+        }
+        link.put(x, relation);
+        return true;
     }
 
-    public void postContent(String content) {
+    public void postContent(String content, int repost) {
         int index = -1;
-        if (originalContents.contains(content) == false) {
+        if (repost == 0) {
             originalContents.add(content);
             contents.add(content);
+            System.out.println("Post created");
+            return;
         } else {
             index = contents.indexOf(content);
             contents.add(contents.get(index));
-
-        }
-        int x = contents.size();
-        if (contents.size() > 1 && (contents.get(x - 1) == contents.get(index))) {
             System.out.println("Reposted");
-        } else
-
-            System.out.println("Post created");
+        }
     }
 
 };
@@ -93,7 +88,7 @@ class Individual extends Node {
     public boolean checkLinkSanity(Node x, String relation) {
         if (x.getClass().getName().matches("Group|Organisation") && relation.matches("member")) {
             return true;
-        } else if (x.getClass().getName().matches("Business") && relation.matches("member|owner")) {
+        } else if (x.getClass().getName().matches("Business") && relation.matches("customer|owner")) {
             return true;
         }
         return false;
@@ -157,7 +152,8 @@ class Business extends Group {
 
     @Override
     public String toString() {
-        String returnString = super.toString() + "Location: " + this.getLocation() + "\n";
+        String returnString = super.toString() + "Location: "
+                + String.format("(%.2f,%.2f)", this.getLocation().getX(), this.getLocation().getY());
         return returnString;
     }
 
@@ -179,22 +175,27 @@ class Organisation extends Business {
 public class Network {
     HashMap<Integer, Node> Nodes = new HashMap<Integer, Node>();
 
-    public void createNode(Scanner obj) {
+    public boolean createNode(Scanner obj) {
         System.out.println("Enter Node Type");
         String typeName = obj.nextLine();
         if (typeName.equalsIgnoreCase("Individual")) {
             Node temp = new Individual(obj);
             Nodes.put(temp.getID(), temp);
+            return true;
         } else if (typeName.equalsIgnoreCase("Group")) {
             Node temp = new Group(obj);
             Nodes.put(temp.getID(), temp);
+            return true;
         } else if (typeName.equalsIgnoreCase("Organisation")) {
             Node temp = new Organisation(obj);
             Nodes.put(temp.getID(), temp);
+            return true;
         } else if (typeName.equalsIgnoreCase("Business")) {
             Node temp = new Business(obj);
             Nodes.put(temp.getID(), temp);
+            return true;
         }
+        return false;
     }
 
     public void deleteNode(Scanner obj) {
@@ -218,7 +219,7 @@ public class Network {
 
         if (keyType.equalsIgnoreCase("name")) {
             Nodes.forEach((id, n) -> {
-                if (n.getName().contentEquals(key)) {
+                if (n.getName().toLowerCase().contains(key.toLowerCase())) {
                     ans.add(id);
                 }
             });
@@ -238,10 +239,14 @@ public class Network {
                 }
             });
         }
-
+        if (ans.size() == 0) {
+            System.out.println("No such node found");
+            return;
+        }
         for (int i : ans) {
             System.out.println("*******\n" + Nodes.get(i));
         }
+
     }
 
     public void printLinkedNodes(Scanner obj) {
@@ -249,10 +254,9 @@ public class Network {
         int x = Integer.parseInt(obj.nextLine());
 
         System.out.println("Links:");
-        for (Map.Entry<Node, String> linkEntry : Nodes.get(x).link.entrySet()) {
-            System.out.println(Nodes.get(x).getName() + "--" + linkEntry.getValue() + "--"
-                    + linkEntry.getKey().getName() + ", ID: " + linkEntry.getKey().getID());
-        }
+        Nodes.get(x).link.forEach((n, v) -> {
+            System.out.println(Nodes.get(x).getName() + "--" + v + "--" + n.getName() + ", ID: " + n.getID());
+        });
     }
 
     public void createContent(Scanner obj) {
@@ -260,7 +264,7 @@ public class Network {
         int x = Integer.parseInt(obj.nextLine());
         System.out.println("Enter Content for new Post");
         String content = obj.nextLine();
-        Nodes.get(x).postContent(content);
+        Nodes.get(x).postContent(content, 0);
     }
 
     public void repostContent(Scanner obj) {
@@ -276,11 +280,11 @@ public class Network {
             System.out.println(i + ": " + post);
         }
         int select = Integer.parseInt(obj.nextLine());
-        currNode.postContent(originalPosts.get(select - 1));
+        currNode.postContent(originalPosts.get(select - 1), 1);
 
     }
 
-    public void createLinkForNodes(Scanner obj) {
+    public boolean createLinkForNodes(Scanner obj) {
         System.out.println("Enter Node 1 ID");
         int x = Integer.parseInt(obj.nextLine());
         System.out.println("Enter Node 2 ID");
@@ -288,9 +292,9 @@ public class Network {
         System.out.println("Enter Relation");
         String relation = obj.nextLine();
 
-        Nodes.get(x).insertLink(Nodes.get(y), relation);
-        Nodes.get(y).insertLink(Nodes.get(x), relation);
-
+        boolean returnTrue = Nodes.get(x).insertLink(Nodes.get(y), relation)
+                && Nodes.get(y).insertLink(Nodes.get(x), relation);
+        return returnTrue;
     }
 
     public void searchContent(Scanner obj) {
@@ -337,7 +341,7 @@ public class Network {
         Scanner obj = new Scanner(System.in);
         int flag = -1;
         while (flag != 0) {
-            System.out.println("Enter 1 for Creating Node");
+            System.out.println("\nEnter 1 for Creating Node");
             System.out.println("Enter 2 for Deleting Node");
             System.out.println("Enter 3 for creating a link between two nodes");
             System.out.println("Enter 4 for Searching for Node");
@@ -349,18 +353,26 @@ public class Network {
             System.out.println("Enter 10 to Display all nodes");
             System.out.println("Enter 0 to exit");
             flag = Integer.parseInt(obj.nextLine());
-
+            boolean check;
             switch (flag) {
                 case 0:
                     break;
                 case 1:
-                    network.createNode(obj);
+                    check = network.createNode(obj);
+                    if (check == false) {
+                        System.out.println("Invalid Type name,Node not created");
+                    } else
+                        System.out.println("Node Created");
                     break;
                 case 2:
                     network.deleteNode(obj);
                     break;
                 case 3:
-                    network.createLinkForNodes(obj);
+                    check = network.createLinkForNodes(obj);
+                    if (check == false) {
+                        System.out.println("Invalid relation,Link not created");
+                    } else
+                        System.out.println("Link created");
                     break;
                 case 4:
                     network.searchNode(obj);
