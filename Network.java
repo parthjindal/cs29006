@@ -2,176 +2,6 @@ import java.util.*;
 import java.time.*;
 import java.awt.geom.*;
 
-abstract class Node {
-    protected int id;
-    protected String name;
-    protected Date createTime;
-    static int count = 0;
-    public ArrayList<String> contents;
-    public HashSet<String> originalContents;
-    public Map<Node, String> link;
-
-    Node(Scanner obj) {
-        originalContents = new HashSet<String>();
-        contents = new ArrayList<String>();
-        link = new HashMap<Node, String>();
-        createTime = new Date();
-        id = count;
-        count++;
-        setName(obj);
-    }
-
-    abstract public boolean checkLinkSanity(Node x, String relation);
-
-    @Override
-    public String toString() {
-        String returnString = "Name: " + getName() + "\nID:" + this.getID() + "\nType: " + this.getClass().getName()
-                + "\n";
-        return returnString;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public int getID() {
-        return this.id;
-    }
-
-    public void setName(Scanner obj) {
-        System.out.print("Enter Name:");
-        name = obj.nextLine();
-    }
-
-    public boolean insertLink(Node x, String relation) {
-        if (checkLinkSanity(x, relation) == false) {
-            return false;
-        }
-        link.put(x, relation);
-        return true;
-    }
-
-    public void postContent(String content, int repost) {
-        int index = -1;
-        if (repost == 0) {
-            originalContents.add(content);
-            contents.add(content);
-            System.out.println("Post created");
-            return;
-        } else {
-            index = contents.indexOf(content);
-            contents.add(contents.get(index));
-            System.out.println("Reposted");
-        }
-    }
-
-};
-
-class Individual extends Node {
-    private LocalDate birthDate;
-
-    Individual(Scanner obj) {
-        super(obj);
-        setBirthdate(obj);
-    }
-
-    public LocalDate getBirthDate() {
-        return this.birthDate;
-    }
-
-    public void setBirthdate(Scanner obj) {
-        System.out.print("Enter DOB(yyyy-mm-dd)");
-        String dateString = obj.nextLine();
-        birthDate = LocalDate.parse(dateString);
-    }
-
-    public boolean checkLinkSanity(Node x, String relation) {
-        if (x.getClass().getName().matches("Group|Organisation") && relation.matches("member")) {
-            return true;
-        } else if (x.getClass().getName().matches("Business") && relation.matches("customer|owner")) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        String returnString = super.toString() + "Date of Birth: " + this.getBirthDate() + "\n";
-        return returnString;
-    }
-
-};
-
-class Group extends Node {
-
-    Group(Scanner obj) {
-        super(obj);
-    }
-
-    public boolean checkLinkSanity(Node x, String relation) {
-        if (x.getClass().getName().matches("Individual") && relation.matches("member"))
-            return true;
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-}
-
-class Business extends Group {
-    protected Point2D.Double location;
-
-    Business(Scanner obj) {
-        super(obj);
-        location = new Point2D.Double();
-        setLocation(obj);
-    }
-
-    public void setLocation(Scanner obj) {
-        System.out.print("Enter Location(X Y)");
-        location.x = obj.nextDouble();
-        location.y = obj.nextDouble();
-        obj.nextLine();
-    }
-
-    public Point2D.Double getLocation() {
-        return location;
-    }
-
-    @Override
-    public boolean checkLinkSanity(Node x, String relation) {
-        if (x.getClass().getName().matches("Group") && relation.matches("member")) {
-            return true;
-        } else if (x.getClass().getName().matches("Individual") && relation.matches("customer|owner")) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        String returnString = super.toString() + "Location: "
-                + String.format("(%.2f,%.2f)", this.getLocation().getX(), this.getLocation().getY());
-        return returnString;
-    }
-
-};
-
-class Organisation extends Business {
-    Organisation(Scanner obj) {
-        super(obj);
-    }
-
-    @Override
-    public boolean checkLinkSanity(Node x, String relation) {
-        if (x.getClass().getName().matches("Individual") && relation.matches("member"))
-            return true;
-        return false;
-    }
-}
-
 public class Network {
     HashMap<Integer, Node> Nodes = new HashMap<Integer, Node>();
 
@@ -198,15 +28,18 @@ public class Network {
         return false;
     }
 
-    public void deleteNode(Scanner obj) {
+    public boolean deleteNode(Scanner obj) {
         System.out.println("Enter Node ID");
         int key = Integer.parseInt(obj.nextLine());
+        if (!Nodes.containsKey(key))
+            return false;
         Node currNode = Nodes.get(key);
         currNode.link.forEach((n, r) -> {
             n.link.remove(currNode);
         });
         Nodes.remove(key);
-        System.out.println("Node Deleted");
+        return true;
+
     }
 
     public void searchNode(Scanner obj) {
@@ -253,6 +86,10 @@ public class Network {
         System.out.println("Enter Node ID");
         int x = Integer.parseInt(obj.nextLine());
 
+        if (Nodes.get(x).link.size() == 0) {
+            System.out.println("No Links for this Node");
+            return;
+        }
         System.out.println("Links:");
         Nodes.get(x).link.forEach((n, v) -> {
             System.out.println(Nodes.get(x).getName() + "--" + v + "--" + n.getName() + ", ID: " + n.getID());
@@ -321,8 +158,13 @@ public class Network {
     public void DisplayLinkedContent(Scanner obj) {
         System.out.println("Enter Node ID");
         int x = Integer.parseInt(obj.nextLine());
+        if(Nodes.get(x).link.size() == 0){
+            System.out.println("No linked nodes");
+            return;
+        }
         Nodes.get(x).link.forEach((k, v) -> {
-            System.out.println("Linked Node ID:" + k.getID());
+            System.out.println("**********Linked Node ID:" + k.getID());
+            System.out.println("Posts:");
             for (String post : k.contents) {
                 System.out.println(post);
             }
@@ -341,7 +183,8 @@ public class Network {
         Scanner obj = new Scanner(System.in);
         int flag = -1;
         while (flag != 0) {
-            System.out.println("\nEnter 1 for Creating Node");
+            System.out.println("\n*********MENU DRIVEN PROGRAM*********");
+            System.out.println("Enter 1 for Creating Node");
             System.out.println("Enter 2 for Deleting Node");
             System.out.println("Enter 3 for creating a link between two nodes");
             System.out.println("Enter 4 for Searching for Node");
@@ -365,7 +208,11 @@ public class Network {
                         System.out.println("Node Created");
                     break;
                 case 2:
-                    network.deleteNode(obj);
+                    check = network.deleteNode(obj);
+                    if (check == false)
+                        System.out.println("Node not present");
+                    else
+                        System.out.println("Node Deleted");
                     break;
                 case 3:
                     check = network.createLinkForNodes(obj);
@@ -401,5 +248,193 @@ public class Network {
 
         }
         obj.close();
+    }
+}
+
+class Node {
+    /*
+     * Base Node Class ************Attributes********** Unique_ID,Name,Set of
+     * original_content, array list of all contents(original and reposted),
+     * links(Map of Node reference and relation)
+     */
+    protected int id;
+    protected String name;
+    protected Date createTime;
+    static int count = 0;
+    public ArrayList<String> contents;
+    public HashSet<String> originalContents;
+    public Map<Node, String> link;
+
+    Node(Scanner obj) {
+        originalContents = new HashSet<String>();
+        contents = new ArrayList<String>();
+        link = new HashMap<Node, String>();
+        createTime = new Date();
+        id = count;
+        count++;
+        setName(obj);
+    }
+
+    //method to check link validity
+    public boolean checkLinkSanity(Node x, String relation){
+        return true;
+    }
+
+    // ToString method to typecast Node reference to String
+    @Override
+    public String toString() {
+        String returnString = "Name: " + getName() + "\nID:" + this.getID() + "\nType: " + this.getClass().getName()
+                + "\nCreation Date: " + this.getCreationDate() + "\n";
+        return returnString;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Date getCreationDate() {
+        return this.createTime;
+    }
+
+    public int getID() {
+        return this.id;
+    }
+
+    public void setName(Scanner obj) {
+        System.out.print("Enter Name:");
+        name = obj.nextLine();
+    }
+
+    // method to insertLink to node and relation.
+    public boolean insertLink(Node x, String relation) {
+        if (checkLinkSanity(x, relation) == false) {
+            return false;
+        }
+        link.put(x, relation);
+        return true;
+    }
+
+    // if repost is true,old reference is inserted again else new String object is
+    // inserted
+    public void postContent(String content, int repost) {
+        int index = -1;
+        if (repost == 0) {
+            originalContents.add(content);
+            contents.add(content);
+            System.out.println("Post created");
+            return;
+        } else {
+            index = contents.indexOf(content);
+            contents.add(contents.get(index));
+            System.out.println("Reposted");
+        }
+    }
+
+};
+
+class Individual extends Node {
+    private LocalDate birthDate;
+
+    Individual(Scanner obj) {
+        super(obj);
+        setBirthdate(obj);
+    }
+
+    public LocalDate getBirthDate() {
+        return this.birthDate;
+    }
+
+    public void setBirthdate(Scanner obj) {
+        System.out.print("Enter DOB(yyyy-mm-dd)");
+        String dateString = obj.nextLine();
+        birthDate = LocalDate.parse(dateString);
+    }
+
+    @Override
+    public boolean checkLinkSanity(Node x, String relation) {
+        if (x.getClass().getName().matches("Group|Organisation") && relation.matches("member")) {
+            return true;
+        } else if (x.getClass().getName().matches("Business") && relation.matches("customer|owner")) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        String returnString = super.toString() + "Date of Birth: " + this.getBirthDate() + "\n";
+        return returnString;
+    }
+
+};
+
+class Group extends Node {
+
+    Group(Scanner obj) {
+        super(obj);
+    }
+
+    @Override
+    public boolean checkLinkSanity(Node x, String relation) {
+        if (x.getClass().getName().matches("Individual") && relation.matches("member"))
+            return true;
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+}
+
+class Business extends Group {
+    protected Point2D.Double location;
+
+    Business(Scanner obj) {
+        super(obj);
+        location = new Point2D.Double();
+        setLocation(obj);
+    }
+
+    public void setLocation(Scanner obj) {
+        System.out.print("Enter Location(X Y)");
+        location.x = obj.nextDouble();
+        location.y = obj.nextDouble();
+        obj.nextLine();
+    }
+
+    public Point2D.Double getLocation() {
+        return location;
+    }
+
+    @Override
+    public boolean checkLinkSanity(Node x, String relation) {
+        if (x.getClass().getName().matches("Group") && relation.matches("member")) {
+            return true;
+        } else if (x.getClass().getName().matches("Individual") && relation.matches("customer|owner")) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        String returnString = super.toString() + "Location: "
+                + String.format("(%.2f,%.2f)", this.getLocation().getX(), this.getLocation().getY());
+        return returnString;
+    }
+
+};
+
+class Organisation extends Business {
+    Organisation(Scanner obj) {
+        super(obj);
+    }
+
+    @Override
+    public boolean checkLinkSanity(Node x, String relation) {
+        if (x.getClass().getName().matches("Individual") && relation.matches("member"))
+            return true;
+        return false;
     }
 }
