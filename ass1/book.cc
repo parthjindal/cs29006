@@ -8,6 +8,20 @@ Book::Book() {}
 Book::Book(const std::string &x,
            const std::string &y, const std::string &z) : title(x), author(y), path(z) {}
 
+std::string Book::getTitle() const { return title; }
+std::string Book::getAuthor() const { return author; }
+std::string Book::getPath() const { return path; }
+
+void Book::setTitle(const std::string&x){ title = x;}
+void Book::setAuthor(const std::string&x){ author = x;}
+void Book::setPath(const std::string&x){ path = x;}
+
+Book::Book(const Book&x){
+    title = x.title;
+    author = x.author;
+    path = x.path;
+}
+
 void Book::parseHeader(const std::string &fileName){
     
     std::ifstream file;
@@ -22,9 +36,9 @@ void Book::parseHeader(const std::string &fileName){
 
         while (std::getline(file, line)){
             if (line.find(title) == 0)
-                this->title = line.substr(line.find(" ") + 1, line.size() - 1 - line.find(" "));
+                this->title = line.substr(line.find(" ") + 1);
             else if (line.find(author) == 0)
-                this->author = line.substr(line.find(" ") + 1, line.size() - 1 - line.find(" "));
+                this->author = line.substr(line.find(" ") + 1);
             else if (line.find(header) == 0)
                 break;
         }
@@ -33,8 +47,3 @@ void Book::parseHeader(const std::string &fileName){
     file.close();
 }
 
-std::string Book::getTitle() const { return title; }
-
-std::string Book::getAuthor() const { return author; }
-
-std::string Book::getPath() const { return path; }
