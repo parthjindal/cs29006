@@ -16,11 +16,16 @@ Fraction::Fraction(int m,int n){
     }
     p = m;
     q = n;
-
-    // std::cout << "Successful" <<std::endl;
 }
 
-inline void Fraction::normalize(){
+Fraction::Fraction(double d){
+    p = d*prcsn;
+    q = prcsn;
+    norm();
+}
+
+Fraction::~Fraction(){}
+inline void Fraction::norm(){
     if(q == 0){
         exit(1);
     }
@@ -37,11 +42,6 @@ inline void Fraction::normalize(){
     }
 }
 
-Fraction::Fraction(double d){
-    p = d*precision();
-    q = precision();
-    this->normalize();
-}
 
 Fraction::Fraction(const Fraction&x){ p = x.p;q = x.q;}
 Fraction& Fraction::operator=(const Fraction&x){
@@ -88,7 +88,7 @@ Fraction operator+(const Fraction&x,const Fraction&y){
     Fraction t;
     t.p = x.p*y.q + y.p*y.q;
     t.q = x.q*y.q;
-    t.normalize();
+    t.norm();
     return t;
 }
 
@@ -96,7 +96,7 @@ Fraction operator-(const Fraction&x,const Fraction&y){
     Fraction t;
     t.p = x.p*y.q - y.p*y.q;
     t.q = x.q*y.q;
-    t.normalize();
+    t.norm();
     return t;
 }
 
@@ -104,7 +104,7 @@ Fraction operator*(const Fraction&x,const Fraction&y){
     Fraction t;
     t.p = x.p*y.p;
     t.q = x.q*y.q;
-    t.normalize();
+    t.norm();
     return t;
 }
 
@@ -112,7 +112,7 @@ Fraction operator/(const Fraction&x,const Fraction&y){
     Fraction t;
     t.p = x.p*y.q;
     t.q = x.q*y.p;
-    t.normalize();
+    t.norm();
     return t;
 }
 Fraction operator%(const Fraction&x,const Fraction&y){
@@ -134,25 +134,25 @@ bool Fraction::operator!=(const Fraction&x){
 }
 
 bool Fraction::operator<(const Fraction&x){
-    if(p*x.q - q*x.p < 0)
+    if(p*x.q < q*x.p)
         return true;
     return false;
 }
 
 bool Fraction::operator<=(const Fraction&x){
-    if(p*x.q - q*x.p <= 0)
+    if(p*x.q <= q*x.p)
         return true;
     return false;
 }
 
 bool Fraction::operator>(const Fraction&x){
-    if(p*x.q - q*x.p > 0)
+    if(p*x.q > q*x.p)
         return true;
     return false;
 }
 
 bool Fraction::operator>=(const Fraction&x){
-    if(p*x.q - q*x.p >= 0)
+    if(p*x.q >= q*x.p )
         return true;
     return false;
 }
@@ -173,9 +173,8 @@ std::ostream& operator<<(std::ostream& os,const Fraction&x){
 
 std::istream& operator>>(std::istream& is,Fraction&x){
     char c;
-    is >> x.p >> c >> x.q;
-    if(c != '/')
-        exit(1);
+    is >> x.p >> x.q;
+    x.norm();
     return is;
 }
 
@@ -197,5 +196,5 @@ const int Fraction::prcsn = 10000000;
 const int Fraction::precision(){
     return prcsn;
 }
-// const Fraction Fraction::sc_fUnity = 1;
-// const Fraction Fraction::sc_fZero = 0;
+const Fraction Fraction::sc_fUnity = Fraction();
+const Fraction Fraction::sc_fZero = Fraction(0);

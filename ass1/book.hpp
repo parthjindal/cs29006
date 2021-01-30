@@ -13,6 +13,7 @@ public:
     Book();
     Book(const std::string &x, const std::string &y, const std::string &z);
     Book(const Book &x);
+    virtual ~Book(){};
     void setTitle(const std::string &);
     void setAuthor(const std::string &);
     void setPath(const std::string &);

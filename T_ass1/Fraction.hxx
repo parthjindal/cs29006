@@ -12,12 +12,12 @@ class Fraction{
     static const int precision();
     static int gcd(int,int);
     // static int lcm(int,int){};
-    void normalize();
+    void norm();
     public:
     Fraction(int = 1, int =1 );
-    Fraction(double);
+    explicit Fraction(double);
     Fraction(const Fraction&);
-    ~Fraction(){};
+    ~Fraction();
     
     Fraction& operator=(const Fraction&);
     Fraction operator-();
@@ -25,8 +25,8 @@ class Fraction{
     Fraction& operator++();
     Fraction operator++(int);
     Fraction& operator--();
-    // static const Fraction sc_fUnity;
-    // static const Fraction sc_fZero;
+    static const Fraction sc_fUnity;
+    static const Fraction sc_fZero;
     Fraction operator--(int);
     friend Fraction operator+(const Fraction&,const Fraction&);
     friend Fraction operator-(const Fraction&,const Fraction&);

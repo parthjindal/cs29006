@@ -25,7 +25,7 @@ void TestFraction()
     f3 = f1;
     cout << "Assignment (After): f3 = " << f3 << ". f1 = " << f1 << endl;
     
-    // f3 = Fraction::sc_fUnity;
+    f3 = Fraction::sc_fUnity;
 
     // UNARY ARITHMETIC OPERATORS
     // --------------------------
@@ -33,25 +33,25 @@ void TestFraction()
     cout << "Unary Minus: f3 = " << f3 << ". f1 = " << f1 << endl;
     
     // Pre-decrement. Dividendo
-    // f3 = Fraction::sc_fUnity;
+    f3 = Fraction::sc_fUnity;
     cout << "Pre-Decrement (Before): f3 = " << f3 << ". f1 = " << f1 << endl;
     f3 = --f1;
     cout << "Pre-Decrement (After): f3 = " << f3 << ". f1 = " << f1 << endl;
 
     // Post-decrement. Lazy Dividendo
-    // f3 = Fraction::sc_fUnity;
+    f3 = Fraction::sc_fUnity;
     cout << "Post-Decrement (Before): f3 = " << f3 << ". f1 = " << f1 << endl;
     f3 = f1--;
     cout << "Post-Decrement (After): f3 = " << f3 << ". f1 = " << f1 << endl;
     
     // Pre-increment. Componendo
-    // f3 = Fraction::sc_fUnity;
+    f3 = Fraction::sc_fUnity;
     cout << "Pre-Increment (Before): f3 = " << f3 << ". f1 = " << f1 << endl;
     f3 = ++f1;
     cout << "Pre-Increment (After): f3 = " << f3 << ". f1 = " << f1 << endl;
     
     // Post-increment. Lazy Componendo
-    // f3 = Fraction::sc_fUnity;
+    f3 = Fraction::sc_fUnity;
     cout << "Post-Increment (Before): f3 = " << f3 << ". f1 = " << f1 << endl;
     f3 = f1++;
     cout << "Post-Increment (After): f3 = " << f3 << ". f1 = " << f1 << endl;

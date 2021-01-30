@@ -8,7 +8,8 @@ using namespace std;
 void TestFraction();
 
 int main()
-{
+{  
+    // cout <<Fraction::sc_fZero;
     TestFraction();
     return 0;
 }

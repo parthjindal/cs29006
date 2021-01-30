@@ -13,13 +13,14 @@
 
 class LMS{
     std::set<std::string> files;
-    std::map<std::string,std::string>books;
+    std::map<std::string,std::string>bookpairs;
+    std::vector<Book*> books;
     std::fstream indexFile;
 
 public:
     LMS();
     void insertBook(Book &);
-    void deleteBook(Book &);
+    void deleteBook(const std::string&);
     void updateSystem(const std::string &);
     std::vector<std::string> readDir(const std::string &);
 };
