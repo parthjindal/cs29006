@@ -3,7 +3,7 @@
 
 #include<iostream>
 #include<fstream>
-
+#include<cmath>
 class Fraction{
     int p;
     unsigned int q;
@@ -11,7 +11,7 @@ class Fraction{
     
     static const int precision();
     static int gcd(int,int);
-    // static int lcm(int,int){};
+    static int lcm(int,int);
     void norm();
     public:
     Fraction(int = 1, int =1 );
@@ -33,12 +33,36 @@ class Fraction{
     friend Fraction operator*(const Fraction&,const Fraction&);
     friend Fraction operator/(const Fraction&,const Fraction&);
     friend Fraction operator%(const Fraction&,const Fraction&);
-    bool operator==(const Fraction&);
-    bool operator!=(const Fraction&);
-    bool operator<(const Fraction&);
-    bool operator<=(const Fraction&);
-    bool operator>(const Fraction&);
-    bool operator>=(const Fraction&);
+    inline bool operator==(const Fraction&x){
+        if(p == x.p && q == x.q )
+            return true;
+        return false;
+    }
+    inline bool operator!=(const Fraction&x){
+        if(p != x.p || q != x.q )
+            return true;
+        return false;
+    }
+    inline bool operator<(const Fraction&x){
+        if(p*int(x.q) < int(q)*x.p)
+            return true;
+        return false;
+    };
+    inline bool operator<=(const Fraction&x){
+        if(p*int(x.q) <= int(q)*x.p)
+            return true;
+        return false;  
+    };
+    inline bool operator>(const Fraction&x){
+        if(p*int(x.q) > int(q)*x.p)
+            return true;
+        return false;
+    };
+    inline bool operator>=(const Fraction&x){
+        if(p*int(x.q) >= int(q)*x.p)
+            return true;
+        return false;
+    };
     Fraction operator!();
     friend std::ostream& operator<<(std::ostream&,const Fraction&);
     friend std::istream& operator>>(std::istream&,Fraction&);

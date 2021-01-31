@@ -1,34 +1,28 @@
 #include "Fraction.hxx"
 
 Fraction::Fraction(int m,int n){
-    if(m == 0){
-        p = 0;
-        q = 1;
-        return ;
-    }
-    if(n < 0 ){
-        p = -m;
-        q = -n;
-        return ;
-    }else
-    if(n == 0){
+    if(n == 0)
         exit(1);
-    }
-    p = m;
-    q = n;
+    if(m == 0) {p = 0; q = 1;}
+    else
+    if(n < 0 ) {p = -m;q = -n;}
+    else {p = m;q = n;}
+    norm();
 }
 
 Fraction::Fraction(double d){
+    int x = std::floor(d);
+    d -= x;
     p = d*prcsn;
     q = prcsn;
+    norm();
+    p += int(q)*x;
     norm();
 }
 
 Fraction::~Fraction(){}
+
 inline void Fraction::norm(){
-    if(q == 0){
-        exit(1);
-    }
     if( p == 0){
         q = 1;
         return ;
@@ -63,57 +57,50 @@ Fraction Fraction::operator+(){
 }
 
 Fraction& Fraction::operator++(){
-    p += q;
+    p += int(q);
+    norm();
     return *this;
 }
 
 Fraction Fraction::operator++(int){
     Fraction t = *this;
-    p +=q;
+    p += int(q);
+    norm();
     return t;
 }
 
 Fraction& Fraction::operator--(){
-    p -= q;
+    p -= int(q);
+    norm();
     return *this;
 }
 
 Fraction Fraction::operator--(int){
     Fraction t = *this;
-    p -= q;
+    p -= int(q);
+    //norm called for p == 0 sanity check
+    norm();
     return t;
 }
 
-Fraction operator+(const Fraction&x,const Fraction&y){
-    Fraction t;
-    t.p = x.p*y.q + y.p*y.q;
-    t.q = x.q*y.q;
-    t.norm();
-    return t;
+Fraction operator+(const Fraction&x,const Fraction&y){ 
+    return Fraction(x.p*int(y.q) + y.p*int(y.q),x.q*y.q);
 }
 
 Fraction operator-(const Fraction&x,const Fraction&y){
-    Fraction t;
-    t.p = x.p*y.q - y.p*y.q;
-    t.q = x.q*y.q;
-    t.norm();
-    return t;
+    return Fraction(x.p*int(y.q) - y.p*int(y.q),x.q*y.q);
 }
 
 Fraction operator*(const Fraction&x,const Fraction&y){
-    Fraction t;
-    t.p = x.p*y.p;
-    t.q = x.q*y.q;
-    t.norm();
-    return t;
+    int m = x.p*y.p;
+    unsigned int n = x.q*y.q;
+    return Fraction(m,n);
 }
 
 Fraction operator/(const Fraction&x,const Fraction&y){
-    Fraction t;
-    t.p = x.p*y.q;
-    t.q = x.q*y.p;
-    t.norm();
-    return t;
+    int m = x.p*int(y.q);
+    int n = x.q*int(y.p);
+    return Fraction(m,n);
 }
 Fraction operator%(const Fraction&x,const Fraction&y){
     Fraction t;
@@ -121,49 +108,9 @@ Fraction operator%(const Fraction&x,const Fraction&y){
     t = x - int(t.p/t.q)*t;
     return t;
 }
-bool Fraction::operator==(const Fraction&x){
-    if(p == x.p && q == x.q )
-        return true;
-    return false;
-}
-
-bool Fraction::operator!=(const Fraction&x){
-    if(p != x.p || q != x.q )
-        return true;
-    return false;
-}
-
-bool Fraction::operator<(const Fraction&x){
-    if(p*x.q < q*x.p)
-        return true;
-    return false;
-}
-
-bool Fraction::operator<=(const Fraction&x){
-    if(p*x.q <= q*x.p)
-        return true;
-    return false;
-}
-
-bool Fraction::operator>(const Fraction&x){
-    if(p*x.q > q*x.p)
-        return true;
-    return false;
-}
-
-bool Fraction::operator>=(const Fraction&x){
-    if(p*x.q >= q*x.p )
-        return true;
-    return false;
-}
 
 Fraction Fraction::operator!(){
-    Fraction t;
-    if(p == 0)
-        exit(1);
-    t.p = q;
-    t.q = p;
-    return t;
+    return Fraction(q,p);
 }
 
 std::ostream& operator<<(std::ostream& os,const Fraction&x){
@@ -172,27 +119,30 @@ std::ostream& operator<<(std::ostream& os,const Fraction&x){
 }
 
 std::istream& operator>>(std::istream& is,Fraction&x){
-    char c;
-    is >> x.p >> x.q;
-    x.norm();
+    int m,n;
+    is >> m >> n;
+    x = Fraction(m,n);
     return is;
 }
 
+int Fraction::lcm(int a,int b){
+    return (a*b)/(gcd(a,b));
+}
 
 int Fraction::gcd(int a,int b){   
     if(abs(a) >= abs(b)){
         if( b== 0 )
             return a;
-        return gcd(b,a%b);
+        return abs(gcd(b,a%b));
     }
     else{
         if( a== 0 )
             return b;
-        return gcd(a,b%a);
+        return abs(gcd(a,b%a));
     }
 }
 
-const int Fraction::prcsn = 10000000;
+const int Fraction::prcsn = 10000;
 const int Fraction::precision(){
     return prcsn;
 }
