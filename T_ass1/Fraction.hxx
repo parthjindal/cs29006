@@ -38,34 +38,22 @@ public:
     
 
     inline bool operator==(const Fraction &x){ //inline operator for equality
-        if (p == x.p && q == x.q)
-            return true;
-        return false;
+        return (p == x.p && q == x.q);
     }
     inline bool operator!=(const Fraction &x){ //inline operator for not-equal-to
-        if (p != x.p || q != x.q)
-            return true;
-        return false;
+        return (p != x.p || q != x.q);
     }
     inline bool operator<(const Fraction &x){ //inline operator for less than
-        if (p * int(x.q) < int(q) * x.p)
-            return true;
-        return false;
+        return (p * int(x.q) < int(q) * x.p);
     };
     inline bool operator<=(const Fraction &x){ //inline operator for less-than-equalTo
-        if (p * int(x.q) <= int(q) * x.p)
-            return true;
-        return false;
+        return (p * int(x.q) <= int(q) * x.p);
     };
     inline bool operator>(const Fraction &x){ //inline operator for greater-than
-        if (p * int(x.q) > int(q) * x.p)
-            return true;
-        return false;
+        return (p * int(x.q) > int(q) * x.p);
     };
     inline bool operator>=(const Fraction &x){ //inline greater than equalTo
-        if (p * int(x.q) >= int(q) * x.p)
-            return true;
-        return false;
+        return (p * int(x.q) >= int(q) * x.p);
     };
 
     Fraction operator!(); //Not operator(new semantics)
