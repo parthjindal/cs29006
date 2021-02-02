@@ -21,9 +21,9 @@ class Chapter{
 class Novel : public Book
 {   std::vector<Chapter> chapters;
     public:
+    void printChapter(int);
     void parseBook();
-    void printBook(){};
-    void query(const std::string&,int);
+    void query(const std::string&,int,int = 0);
 
 };
 #endif

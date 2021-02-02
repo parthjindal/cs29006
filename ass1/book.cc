@@ -31,10 +31,17 @@ Book& Book::operator=(const Book &x){
 }
 
 void Book::printBook(){
-    std::cout <<"Book: " << title << "\n";
-    std::cout <<"Author: "<< author << "\n";
-    std::cout <<"File: "<< path << "\n\n";
-
+    std::ifstream file;
+    file.open(path, std::ios::in);
+    std::string line;
+    int count = 0,flag = 0;
+    if (file.is_open()){
+        while (std::getline(file, line) && count < 50){
+            std::cout << line << "\n";
+            if(line.size() != 0)
+                count ++;
+        }
+    }
 }
 
 

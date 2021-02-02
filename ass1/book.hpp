@@ -24,7 +24,7 @@ public:
     std::string getPath() const;
     void parseHeader();
     virtual void parseBook(){};
-    virtual void printBook(){};
-    virtual void query(const std::string&,int){};
+    virtual void printBook();
+    virtual void query(const std::string&,int,int){};
 };
 #endif // _BOOK_H
