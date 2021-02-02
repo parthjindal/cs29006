@@ -30,6 +30,14 @@ Book& Book::operator=(const Book &x){
     return *this;
 }
 
+void Book::printBook(){
+    std::cout <<"Book: " << title << "\n";
+    std::cout <<"Author: "<< author << "\n";
+    std::cout <<"File: "<< path << "\n\n";
+
+}
+
+
 void Book::parseHeader(){
 
     std::ifstream file;

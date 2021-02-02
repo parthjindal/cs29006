@@ -20,7 +20,7 @@ class LMS{
     public:
     LMS();
     void listBook();
-    Book* getBook(const std::string&,const std::string&);
+    std::vector<Book*> getBooks(std::string&,std::string&);
     void updateSystem(const std::string &);
     std::vector<std::string> readDir(const std::string &);
 };

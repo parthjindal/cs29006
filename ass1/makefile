@@ -1,4 +1,4 @@
-CC = g++ -std=c++11
+CC = g++ -std=c++11 -g
 DEPS = main.o novel.o book.o logger.o lms.o
 
 main: $(DEPS)

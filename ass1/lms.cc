@@ -45,18 +45,39 @@ void LMS::listBook(){
     using namespace std;
     for(Book* x:books){
         x->parseHeader();
-        cout << "*****************\n";
-        cout <<"Name:" << x->getTitle() << "\n";
-        cout <<"Author: "<<x->getAuthor() << "\n";
-        cout <<"FileName: "<<x->getPath() << "\n";
+        cout << "*****************\n\n";
+        x->printBook();
     }
     return ;
 }
 
 
-Book* LMS::getBook(const std::string& key,const std::string &keytype){
+std::vector<Book*> LMS::getBooks(std::string& key,std::string &keytype){
+    using namespace std;
+    transform(key.begin(), key.end(), key.begin(), ::tolower);
+    vector<Book*> y;
 
+    if(keytype == "name"){
+        for(Book* x:books){
+            string name(x->getTitle());
+            transform(name.begin(),name.end(),name.begin(),::tolower);
+            if(name.find(key) != string::npos)
+                y.push_back(x);
+        }
+    }
+    else
+    if(keytype == "author"){
+        for(Book* x:books){
+            string name(x->getAuthor());
+            transform(name.begin(),name.end(),name.begin(),::tolower);
+            if(name.find(key) != string::npos)
+                y.push_back(x);
+        }
+    }
+    return y;
 }
+
+
 
 
 void LMS::updateSystem(const std::string &path){
