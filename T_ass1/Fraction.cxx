@@ -125,7 +125,7 @@ Fraction operator/(const Fraction&x,const Fraction&y){
 Fraction operator%(const Fraction&x,const Fraction&y){
     Fraction t;
     t = x/y;
-    t = x - Fraction(int(t.p/int(t.q)))*t;
+    t = x - Fraction(int(t.p/int(t.q)))*y;
     return t;
 }
 
