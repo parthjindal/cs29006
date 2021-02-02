@@ -44,6 +44,12 @@ void Book::printBook(){
     }
 }
 
+bool Book::operator==(const Book&x){
+    if((title == x.getTitle()) && 
+        (author == x.getAuthor()) && (path == x.getPath()))
+        return true;
+    return false;
+}
 
 void Book::parseHeader(){
 

@@ -15,6 +15,7 @@ public:
     Book(const std::string &x, const std::string &y, const std::string &z);
     Book(const Book &x);
     Book& operator=(const Book&x);
+    bool operator==(const Book&x);
     virtual ~Book(){};
     void setTitle(const std::string &);
     void setAuthor(const std::string &);

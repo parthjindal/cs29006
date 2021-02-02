@@ -13,8 +13,8 @@ int main(){
     string a("moby"),b("name");
     vector<Book*> q = x.getBooks(a,b);
     for(Book* m:q){
-        m->parseBook();
-        m->printBook();
+        x.deleteBook(m);
     }
+    x.listBook();
     
 }

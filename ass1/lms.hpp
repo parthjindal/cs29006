@@ -16,10 +16,11 @@ class LMS{
     std::vector<Book*> books;
     std::fstream indexFile;
     void readIndex();
-
+    void writeToIndex();
     public:
     LMS();
     void listBook();
+    void deleteBook(Book*);
     std::vector<Book*> getBooks(std::string&,std::string&);
     void updateSystem(const std::string &);
     std::vector<std::string> readDir(const std::string &);

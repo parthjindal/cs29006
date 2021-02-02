@@ -46,7 +46,9 @@ void LMS::listBook(){
     for(Book* x:books){
         x->parseHeader();
         cout << "*****************\n\n";
-        x->printBook();
+        cout << "Book: " << x->getTitle() << "\n";
+        cout << "Author: " << x->getAuthor() << "\n";
+        cout << "Path: " << x->getPath() << "\n";
     }
     return ;
 }
@@ -77,7 +79,17 @@ std::vector<Book*> LMS::getBooks(std::string& key,std::string &keytype){
     return y;
 }
 
+void LMS::deleteBook(Book* y){
+    std::vector<Book*>::reverse_iterator itr;
 
+    for(itr = books.rbegin();itr < books.rend();++itr){
+        if(*(*itr) == *y){
+            Book* temp = *(itr);
+            books.erase((itr+1).base());
+            delete temp;
+        }
+    }
+}
 
 
 void LMS::updateSystem(const std::string &path){
@@ -108,7 +120,12 @@ void LMS::updateSystem(const std::string &path){
     }
     bookpairs.clear();
     bookpairs = updatedBooks;
+    writeToIndex();
+}
 
+
+void LMS::writeToIndex(){
+    using namespace std;
     map<string, string>::iterator m_itr;
     indexFile.open("index.txt", ios::out);
     if (indexFile.is_open()){
@@ -117,7 +134,7 @@ void LMS::updateSystem(const std::string &path){
             indexFile << "{" << m_itr->first << ":" << m_itr->second << "}\n";
         }
     }
-    indexFile.close();
+    indexFile.close();  
 }
 
 Book* getObject(const std::string &x){
