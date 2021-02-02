@@ -7,9 +7,7 @@
 using namespace std;
 
 int main(){
-    LMS lms;
-    lms.updateSystem("/home/parth/cs29006/files");
-    Logger& logger = Logger::getInstance();
-    logger.close();
-
+    LMS x;
+    x.updateSystem("/home/parth/cs29006/files");
+    x.listBook();
 }

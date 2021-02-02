@@ -2,13 +2,15 @@
 #include "logger.hpp"
 #include <vector>
 #include <string>
-typedef std::vector<std::string> para;
+typedef std::vector<std::string> Paragraph;
 #ifndef _CHAPTER_H
 #define _CHAPTER_H
 
 class Chapter{
-    std::string chapterName;
-    std::vector<para> paragraphs;
+    public:
+    int cno;
+    std::string cName;
+    std::vector<Paragraph> paragraphs;
 };
 
 #endif
@@ -17,11 +19,11 @@ class Chapter{
 #define _NOVEL_H
 
 class Novel : public Book
-{   
+{   std::vector<Chapter> chapters;
     public:
-    void parseBook(const std::string &fileName){};
+    void parseBook();
     void printBook(){};
-    void query();
+    void query(const std::string&,int);
 
 };
 #endif

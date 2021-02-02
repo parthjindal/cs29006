@@ -19,9 +19,8 @@ class LMS{
 
     public:
     LMS();
-    void insertBook(Book &);
-    
-    void deleteBook(const std::string&);
+    void listBook();
+    Book* getBook(const std::string&,const std::string&);
     void updateSystem(const std::string &);
     std::vector<std::string> readDir(const std::string &);
 };

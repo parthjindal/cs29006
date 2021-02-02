@@ -12,20 +12,28 @@ std::string Book::getTitle() const { return title; }
 std::string Book::getAuthor() const { return author; }
 std::string Book::getPath() const { return path; }
 
-void Book::setTitle(const std::string&x){ title = x;}
-void Book::setAuthor(const std::string&x){ author = x;}
-void Book::setPath(const std::string&x){ path = x;}
+void Book::setTitle(const std::string &x) { title = x; }
+void Book::setAuthor(const std::string &x) { author = x; }
+void Book::setPath(const std::string &x) { path = x; }
 
-Book::Book(const Book&x){
+Book::Book(const Book &x)
+{
     title = x.title;
     author = x.author;
     path = x.path;
 }
 
-void Book::parseHeader(const std::string &fileName){
-    
+Book& Book::operator=(const Book &x){
+    title = x.title;
+    author = x.author;
+    path = x.path;
+    return *this;
+}
+
+void Book::parseHeader(){
+
     std::ifstream file;
-    file.open(fileName, std::ios::in);
+    file.open(path, std::ios::in);
 
     if (file.is_open()){
 
@@ -46,4 +54,3 @@ void Book::parseHeader(const std::string &fileName){
 
     file.close();
 }
-

@@ -41,6 +41,24 @@ std::vector<std::string> LMS::readDir(const std::string &path){
 }
 
 
+void LMS::listBook(){
+    using namespace std;
+    for(Book* x:books){
+        x->parseHeader();
+        cout << "*****************\n";
+        cout <<"Name:" << x->getTitle() << "\n";
+        cout <<"Author: "<<x->getAuthor() << "\n";
+        cout <<"FileName: "<<x->getPath() << "\n";
+    }
+    return ;
+}
+
+
+Book* LMS::getBook(const std::string& key,const std::string &keytype){
+
+}
+
+
 void LMS::updateSystem(const std::string &path){
     using namespace std;
     vector<string> files = readDir(path); //files in dir
