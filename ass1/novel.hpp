@@ -1,5 +1,4 @@
 #include "book.hpp"
-#include "logger.hpp"
 #include <vector>
 #include <string>
 typedef std::vector<std::string> Paragraph;

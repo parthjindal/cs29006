@@ -1,8 +1,11 @@
 #include "lms.hpp"
 
 //Init LMS (Read Index.txt and Store bookname and typess)
-LMS::LMS(){
+LMS::LMS(const string&x):pathDir(x){}
+
+void LMS::readIndex(){
     using namespace std;
+    ifstream indexFile;
     indexFile.open("index.txt", ios::in);
     if (indexFile.is_open()){
         string line;
@@ -45,10 +48,10 @@ void LMS::listBook(){
     using namespace std;
     for(Book* x:books){
         x->parseHeader();
-        cout << "*****************\n\n";
+        cout << "*****************\n";
         cout << "Book: " << x->getTitle() << "\n";
         cout << "Author: " << x->getAuthor() << "\n";
-        cout << "Path: " << x->getPath() << "\n";
+        cout << "Path: " << x->getPath() << "\n\n";
     }
     return ;
 }
@@ -87,14 +90,26 @@ void LMS::deleteBook(Book* y){
             Book* temp = *(itr);
             books.erase((itr+1).base());
             delete temp;
+            break;
         }
     }
 }
 
+void LMS::freeBook(Book* t){
+    std::vector<Book*>::iterator itr;
+    for(itr = books.begin();itr < books.end();itr++){
+        if(*(*itr) == *t){
+            Book* temp = *itr;
+            *itr = t;
+            delete temp;
+            break;
+        }
+    } 
+}
 
-void LMS::updateSystem(const std::string &path){
+void LMS::updateSystem(){
     using namespace std;
-    vector<string> files = readDir(path); //files in dir
+    vector<string> files = readDir(pathDir); //files in dir
 
     string bookType;
     map<string, string> updatedBooks;
@@ -120,13 +135,29 @@ void LMS::updateSystem(const std::string &path){
     }
     bookpairs.clear();
     bookpairs = updatedBooks;
+    std::vector<Book*>::reverse_iterator itr;
+
+    for(itr = books.rbegin();itr < books.rend();++itr){
+        (*itr)->parseHeader();
+        if(bookpairs.find((*itr)->getTitle()) == bookpairs.end()){
+            cout << "here";
+            Book* temp = *(itr);
+            books.erase((itr+1).base());
+            delete temp;
+        }
+    }
     writeToIndex();
+}
+
+std::string LMS::getBookType(const string&x){
+    return bookpairs.find(x)->second;
 }
 
 
 void LMS::writeToIndex(){
     using namespace std;
     map<string, string>::iterator m_itr;
+    ofstream indexFile;
     indexFile.open("index.txt", ios::out);
     if (indexFile.is_open()){
         for (m_itr = bookpairs.begin();
@@ -140,6 +171,11 @@ void LMS::writeToIndex(){
 Book* getObject(const std::string &x){
     if (x == "Novel"){
         Book *book = new Novel;
+        return book;
+    }
+    else
+    if( x == "Play"){
+        Book* book = new Play;
         return book;
     }
     return new Book;

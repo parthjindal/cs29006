@@ -1,5 +1,4 @@
 #include "book.hpp"
-#include "logger.hpp"
 #include <iostream>
 #include <fstream>
 
