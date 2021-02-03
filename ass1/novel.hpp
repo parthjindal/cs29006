@@ -1,5 +1,6 @@
 #include "book.hpp"
 #include <vector>
+#include<fstream>
 #include <string>
 typedef std::vector<std::string> Paragraph;
 #ifndef _CHAPTER_H

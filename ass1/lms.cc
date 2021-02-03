@@ -56,7 +56,7 @@ void LMS::listBook(){
     return ;
 }
 
-
+//Searching a book by keytype and key
 std::vector<Book*> LMS::getBooks(std::string& key,std::string &keytype){
     using namespace std;
     transform(key.begin(), key.end(), key.begin(), ::tolower);
@@ -81,7 +81,7 @@ std::vector<Book*> LMS::getBooks(std::string& key,std::string &keytype){
     }
     return y;
 }
-
+//deleteBook
 void LMS::deleteBook(Book* y){
     std::vector<Book*>::reverse_iterator itr;
 
@@ -94,7 +94,7 @@ void LMS::deleteBook(Book* y){
         }
     }
 }
-
+//frees memory by deallocating queried book"
 void LMS::freeBook(Book* t){
     std::vector<Book*>::iterator itr;
     for(itr = books.begin();itr < books.end();itr++){
@@ -106,7 +106,7 @@ void LMS::freeBook(Book* t){
         }
     } 
 }
-
+//Updates the LMS
 void LMS::updateSystem(){
     using namespace std;
     vector<string> files = readDir(pathDir); //files in dir
@@ -128,7 +128,7 @@ void LMS::updateSystem(){
             books.push_back(newBook);
         }
         else{
-            bookType = bookpairs.find(book->getTitle())->second;
+            bookType = getBookType(book->getTitle());
             updatedBooks.insert(pair<string, string>(book->getTitle(), bookType));
         }
         delete book;
@@ -149,11 +149,12 @@ void LMS::updateSystem(){
     writeToIndex();
 }
 
+//getBookTYpe
 std::string LMS::getBookType(const string&x){
     return bookpairs.find(x)->second;
 }
 
-
+//writeToIndex.txt
 void LMS::writeToIndex(){
     using namespace std;
     map<string, string>::iterator m_itr;
@@ -168,6 +169,7 @@ void LMS::writeToIndex(){
     indexFile.close();  
 }
 
+//get object of given Type
 Book* getObject(const std::string &x){
     if (x == "Novel"){
         Book *book = new Novel;

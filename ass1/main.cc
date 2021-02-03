@@ -1,6 +1,7 @@
 #include<iostream>
 #include"book.hpp"
 #include"novel.hpp"
+#include"play.hpp"
 #include"lms.hpp"
 
 using namespace std;
