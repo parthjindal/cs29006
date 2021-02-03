@@ -78,6 +78,7 @@ void case2(LMS& sys){
                 cin >> key;
                 books = sys.getBooks(key,keytype);
                 for(Book* x:books){
+                    cout << "*****************\n";
                     cout << "Name: " << x->getTitle() << "\n";
                     cout << "Author: "<< x->getAuthor() << "\n\n";
                 }

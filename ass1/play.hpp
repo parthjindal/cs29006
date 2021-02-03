@@ -1,3 +1,5 @@
+#ifndef _PLAY_H
+#define _PLAY_H
 #include "book.hpp"
 #include <vector>
 #include <string>
@@ -15,3 +17,5 @@ public:
     void parseBook();
     void query(const string &);
 };
+
+#endif
