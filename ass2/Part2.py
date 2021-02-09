@@ -214,7 +214,7 @@ def main():
     root = Tk()
     root.title("Social Network")
     root.configure(bg="#EAF6F6")
-    network = Network("social.txt")
+    network = Network("social_network.txt")
 
     def on_closing():
         network.write_messages("messages.txt")
