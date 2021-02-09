@@ -212,6 +212,7 @@ class PostMessages(Frame):
 
 def main():
     root = Tk()
+    root.title("Social Network")
     root.configure(bg="#EAF6F6")
     network = Network("social.txt")
 
