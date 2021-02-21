@@ -87,5 +87,6 @@
         "scoped_allocator": "cpp",
         "valarray": "cpp",
         "charconv": "cpp"
-    }
+    },
+    "python.pythonPath": "/home/parth/anaconda3/envs/RL/bin/python"
 }
