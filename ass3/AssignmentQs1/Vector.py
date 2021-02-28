@@ -24,15 +24,15 @@ class Vector:
         self._coords[j] = val
 
     def __add__(self, other):
+        if len(self) != len(other):
+            raise Exception("dim must be same")
         return Vector(x+y for x, y in zip(self._coords, other._coords))
 
     def __eq__(self, other) -> bool:
-        # return True if vector has same coordinates as other
-        return all(x == y for x, y in zip(self._coords, other._coords))
+        return (self._coords == other._coords)
 
     def __ne__(self, other):
-        # return True if vector differs from other
-        return any(x != y for x, y in zip(self._coords, other._coords))
+        return (self._coords != other._coords)
 
     def __str__(self):
         s = "<"
@@ -42,10 +42,12 @@ class Vector:
         return s
 
     def __sub__(self, other):
+        if len(self) != len(other):
+            raise Exception("dim must be same")
+
         return Vector(x-y for x, y in zip(self._coords, other._coords))
 
     def __neg__(self):
-        # Soln for Qs. 3
         return Vector(-x for x in self._coords)
 
     def __rmul__(self, value):
@@ -55,19 +57,37 @@ class Vector:
         if isinstance(other, int):
             return Vector(x*other for x in self._coords)
 
-        if isinstance(other, Vector):
+        elif isinstance(other, float):
+            return Vector(x*other for x in self._coords)
+
+        elif isinstance(other, Vector):
+            if len(self) != len(other):
+                raise Exception("dim must be same")
             return sum(x*y for x, y in zip(self._coords, other._coords))
-    #     #Soln for Qs. 4, 5 and 6
+
+        else:
+            raise TypeError("[", type(other).__name__,
+                            "] cant be multiplied with a vector.")
 
 
 def main():
     v1 = Vector(5)
-    v2 = Vector (7)
+    v2 = Vector(7)
     v3 = Vector([1, 2, 3, 4, 5])
     v4 = Vector(v3)
-    print(v1,v2,v3,v4)
-    # Add suitable print statements to display the results
-    # of the different question segments
+    v5 = Vector([7, 8, 9, 10, 11])
+    print(f"v1: {v1}\nv2: {v2}\nv3: {v3}\nv4: {v4}\nv5: {v5}")
+
+    print(f"v3 + v5: {v3+v5}")
+    print(f"v3==v4: {v3 == v4}")
+    print(f"v4==v5: {v4 == v5}")
+    print(f"v3!=v4: {v3!=v4}")
+    print(f"v5 - v4: {v5-v4}")
+    print(f"-v4: {-v4}")
+    print(f"v3 * v5: {v3*v5}")
+    print(f"v3 * v4 * v5: {v3*v4*v5}")
+    print(f"v3 * (-5): {v3*(-5)}")
+    print(f"(-5) * v3: {(-5)*v3}")
 
 
 if __name__ == '__main__':

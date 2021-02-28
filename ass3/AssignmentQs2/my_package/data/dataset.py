@@ -5,7 +5,7 @@ import numpy as np
 
 class Dataset(object):
     '''
-        A class for the dataset that will return data items as per the given index
+        A class for the dataset that will return da>ta items as per the given index
     '''
 
     def __init__(self, annotation_file: str, transforms: list = None):
