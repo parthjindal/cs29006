@@ -13,7 +13,7 @@
 /****************CLASS Declaration*************************/
 class Railways{
 
-    static vector<string> sStations;
+    static vector<Station> sStations;
     static map<pair<string,string>,int> sDistStations;
     
     //CONSTRUCTORS
@@ -24,7 +24,7 @@ class Railways{
 public:
     ~Railways();
     const static Railways& railways(); 
-    friend int Station::GetDistance(const Station&);
+    int GetDistance(const Station&,const Station&) const;
 };
 
 

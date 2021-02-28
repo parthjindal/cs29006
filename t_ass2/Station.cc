@@ -4,8 +4,8 @@
 Station::Station(const string &x) : name(x) {}
 string Station::GetName () const{ return name; }
 
-int Station::GetDistance(const Station& x) {
-    return Railways::sDistStations.at({name,x.name});
+int Station::GetDistance(const Station& x) const{
+    return (Railways::railways()).GetDistance(*this,x);
 }
 
 ostream& operator<<(ostream& os,const Station& x){

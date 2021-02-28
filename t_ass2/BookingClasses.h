@@ -1,8 +1,6 @@
 #ifndef __BOOKING_CLASS_H
 #define __BOOKING_CLASS_H
 
-
-
 #include<string>
 #include<iostream>
 using namespace std;
@@ -11,7 +9,6 @@ using namespace std;
 /**********ABSTRACT CLASS Declaration*******************/
 class BookingClass{
 public:
-    BookingClass();
     virtual double GetLoadFactor() const = 0;
     virtual string GetName() const = 0;
     virtual bool isSitting() const = 0;
@@ -25,6 +22,7 @@ public:
 class Seat:public BookingClass{
     public:
     virtual bool isSitting() const;
+    virtual int GetNumberOfTiers() const;
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
@@ -47,14 +45,13 @@ class Berth3Tier:public Berth{
 
 /**********CLASS Declaration***************************/
 class ACChairCar: public Seat{
-    static const double sloadFactor_;
+    static const double sloadFactor;
     ACChairCar();
     static ACChairCar* sInstance;
     
     public:
     ~ACChairCar();
     const static ACChairCar& Type();
-    int GetNumberOfTiers() const ;
     double GetLoadFactor() const ;
     string GetName() const ;
     bool isAc() const ;
@@ -63,13 +60,13 @@ class ACChairCar: public Seat{
 
 /**********CLASS Declaration***************************/
 class SecondSitting: public Seat{
-    static const double sloadFactor_;
+    static const double sloadFactor;
     SecondSitting();
     static SecondSitting* sInstance;
     
     public:
+    ~SecondSitting();
     const static SecondSitting& Type();
-    int GetNumberOfTiers() const ;
     double GetLoadFactor() const ;
     string GetName() const ;
     bool isAc() const ;
@@ -78,11 +75,12 @@ class SecondSitting: public Seat{
 
 /**********CLASS Declaration***************************/
 class ACFirstClass:public Berth2Tier{
-    static const double sloadFactor_;
+    static const double sloadFactor;
     ACFirstClass();
     static ACFirstClass* sInstance;
     
     public:
+    ~ACFirstClass();
     const static ACFirstClass& Type();
     double GetLoadFactor() const ;
     string GetName() const ;
@@ -92,10 +90,11 @@ class ACFirstClass:public Berth2Tier{
 
 /**********CLASS Declaration***************************/
 class AC2Tier:public Berth2Tier{
-    static const double sloadFactor_;
+    static const double sloadFactor;
     AC2Tier();
     static AC2Tier* sInstance;
     public:
+    ~AC2Tier();
     const static AC2Tier& Type();
     double GetLoadFactor() const ;
     string GetName() const ;
@@ -105,10 +104,11 @@ class AC2Tier:public Berth2Tier{
 
 /**********CLASS Declaration***************************/
 class FirstClass:public Berth2Tier{
-    static const double sloadFactor_;
+    static const double sloadFactor;
     FirstClass();
     static FirstClass* sInstance;
     public:
+    ~FirstClass();
     const static FirstClass& Type();
     double GetLoadFactor() const;
     string GetName() const;
@@ -118,10 +118,11 @@ class FirstClass:public Berth2Tier{
 
 /**********CLASS Declaration***************************/
 class AC3Tier:public Berth3Tier{
-    static const double sloadFactor_;
+    static const double sloadFactor;
     AC3Tier();
     static AC3Tier* sInstance;
     public:
+    ~AC3Tier();
     const static AC3Tier& Type();
     double GetLoadFactor() const;
     string GetName() const;
@@ -131,10 +132,11 @@ class AC3Tier:public Berth3Tier{
 
 /**********CLASS Declaration***************************/
 class Sleeper:public Berth3Tier{
-    static const double sloadFactor_;
+    static const double sloadFactor;
     Sleeper();
     static Sleeper* sInstance;
     public:
+    ~Sleeper();
     const static Sleeper& Type();
     double GetLoadFactor() const;
     string GetName() const;

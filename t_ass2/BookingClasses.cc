@@ -2,25 +2,30 @@
 
 ostream &operator<<(ostream &os, const BookingClass &x)
 {
-    os << "Name: " << x.GetName() << "\n";
-    os << "Load Factor: " << x.GetLoadFactor() << "\n";
-    string _isSitting = x.isSitting() ? "Seat" : "Berth";
-    string _isAc = x.isAc() ? "Yes" : "No";
-    string _isLuxury = x.isLuxury() ? "Luxury" : "Ordinary";
-    os << "Seat/Berth: " << _isSitting << "\n";
-    os << "AC: " << _isAc << "\n";
-    os << "Luxury/Ordinary: " << _isLuxury;
+    os << "Travel Class = " << x.GetName() << "\n";
+    string _isSitting = x.isSitting() ? "Sitting" : "Sleeping";
+    string _isAc = x.isAc() ? "AC" : "Non-AC";
+    string _isLuxury = x.isLuxury() ? "Yes" : "No";
+    os << " : Mode: " << _isSitting << "\n";
+    os << " : Comfort: " << _isAc << "\n";
+    os << " : Bunks: " << x.GetNumberOfTiers() << "\n";
+    os << " : Luxury: " << _isLuxury;
     return os;
 }
 
 bool Seat::isSitting() const { return true; }
+int Seat::GetNumberOfTiers() const { return 0; }
+
 bool Berth::isSitting() const { return false; }
 
 int Berth2Tier::GetNumberOfTiers() const { return 2; }
 int Berth3Tier::GetNumberOfTiers() const { return 3; }
 
 ACChairCar *ACChairCar::sInstance = 0;
-const double ACChairCar::sloadFactor_ = 1.25;
+const double ACChairCar::sloadFactor = 1.25;
+
+ACChairCar::~ACChairCar(){}
+ACChairCar::ACChairCar(){}
 
 const ACChairCar &ACChairCar::Type()
 {
@@ -28,15 +33,18 @@ const ACChairCar &ACChairCar::Type()
         sInstance = new ACChairCar();
     return *sInstance;
 }
-double ACChairCar::GetLoadFactor() const { return sloadFactor_; }
+double ACChairCar::GetLoadFactor() const { return sloadFactor; }
 string ACChairCar::GetName() const { return string("ACChairCar"); }
 bool ACChairCar::isAc() const { return true; }
 bool ACChairCar::isLuxury() const { return false; }
-int ACChairCar::GetNumberOfTiers() const { return 0; }
+
 
 SecondSitting *SecondSitting::sInstance = 0;
-const double SecondSitting::sloadFactor_ = 0.5;
+const double SecondSitting::sloadFactor = 0.5;
 
+
+SecondSitting::~SecondSitting(){}
+SecondSitting::SecondSitting(){}
 const SecondSitting &SecondSitting::Type()
 {
     if (!sInstance)
@@ -44,14 +52,16 @@ const SecondSitting &SecondSitting::Type()
     return *sInstance;
 }
 
-double SecondSitting::GetLoadFactor() const { return sloadFactor_; }
+double SecondSitting::GetLoadFactor() const { return sloadFactor; }
 string SecondSitting::GetName() const { return string("SecondSitting"); }
 bool SecondSitting::isAc() const { return false; }
 bool SecondSitting::isLuxury() const { return false; }
-int SecondSitting::GetNumberOfTiers() const { return 0; }
 
 ACFirstClass *ACFirstClass::sInstance = 0;
-const double ACFirstClass::sloadFactor_ = 3.00;
+const double ACFirstClass::sloadFactor = 3.00;
+
+ACFirstClass::~ACFirstClass(){}
+ACFirstClass::ACFirstClass(){}
 
 const ACFirstClass &ACFirstClass::Type(){
     if (!sInstance)
@@ -59,63 +69,75 @@ const ACFirstClass &ACFirstClass::Type(){
     return *sInstance;
 }
 
-double ACFirstClass::GetLoadFactor() const { return sloadFactor_; }
+double ACFirstClass::GetLoadFactor() const { return sloadFactor; }
 string ACFirstClass::GetName() const { return string("ACFirstClass"); }
 bool ACFirstClass::isAc() const { return true; }
 bool ACFirstClass::isLuxury() const { return true; }
 
 AC2Tier *AC2Tier::sInstance = 0;
-const double AC2Tier::sloadFactor_ = 2.00;
+const double AC2Tier::sloadFactor = 2.00;
+
+AC2Tier::~AC2Tier(){}
+AC2Tier::AC2Tier(){}
 
 const AC2Tier &AC2Tier::Type(){
     if (!sInstance)
-        sInstance = new AC2Tier();
+        sInstance = new AC2Tier;
     return *sInstance;
 }
 
-double AC2Tier::GetLoadFactor() const { return sloadFactor_; }
+double AC2Tier::GetLoadFactor() const { return sloadFactor; }
 string AC2Tier::GetName() const { return string("AC2Tier"); }
 bool AC2Tier::isAc() const { return true; }
 bool AC2Tier::isLuxury() const { return false; }
 
 FirstClass *FirstClass::sInstance = 0;
-const double FirstClass::sloadFactor_ = 2.00;
+const double FirstClass::sloadFactor = 2.00;
+
+FirstClass::~FirstClass(){}
+FirstClass::FirstClass(){}
 
 const FirstClass &FirstClass::Type(){
     if (!sInstance)
-        sInstance = new FirstClass();
+        sInstance = new FirstClass;
     return *sInstance;
 }
 
-double FirstClass::GetLoadFactor() const { return sloadFactor_; }
+double FirstClass::GetLoadFactor() const { return sloadFactor; }
 string FirstClass::GetName() const { return string("FirstClass"); }
 bool FirstClass::isAc() const { return false; }
 bool FirstClass::isLuxury() const { return true; }
 
 AC3Tier *AC3Tier::sInstance = 0;
-const double AC3Tier::sloadFactor_ = 1.75;
+const double AC3Tier::sloadFactor = 1.75;
+
+AC3Tier::AC3Tier(){}
+AC3Tier::~AC3Tier(){}
 
 const AC3Tier &AC3Tier::Type(){
     if (!sInstance)
-        sInstance = new AC3Tier();
+        sInstance = new AC3Tier;
     return *sInstance;
 }
 
-double AC3Tier::GetLoadFactor() const { return sloadFactor_; }
+double AC3Tier::GetLoadFactor() const { return sloadFactor; }
 string AC3Tier::GetName() const { return string("AC3Tier"); }
 bool AC3Tier::isAc() const { return false; }
 bool AC3Tier::isLuxury() const { return false; }
 
 Sleeper *Sleeper::sInstance = 0;
-const double Sleeper::sloadFactor_ = 1.00;
+const double Sleeper::sloadFactor = 1.00;
+
+Sleeper::Sleeper(){}
+Sleeper::~Sleeper(){}
 
 const Sleeper &Sleeper::Type(){
     if (!sInstance)
-        sInstance = new Sleeper();
+        sInstance = new Sleeper;
     return *sInstance;
 }
 
-double Sleeper::GetLoadFactor() const { return sloadFactor_; }
+double Sleeper::GetLoadFactor() const { return sloadFactor; }
 string Sleeper::GetName() const { return string("Sleeper"); }
 bool Sleeper::isAc() const { return false; }
 bool Sleeper::isLuxury() const { return false; }

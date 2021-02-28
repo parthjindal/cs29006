@@ -10,11 +10,10 @@ using namespace std;
 class Station{
 
     const string name;        //name
-    Station(const Station &); //cctor blocked
 public:
     Station(const string &); //ctor
     string GetName() const;
-    int GetDistance(const Station &);
+    int GetDistance(const Station &) const;
     friend ostream &operator<<(std::ostream &, const Station &);
     static void UnitTestStation();
 };
