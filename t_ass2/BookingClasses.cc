@@ -24,8 +24,8 @@ int Berth3Tier::GetNumberOfTiers() const { return 3; }
 ACChairCar *ACChairCar::sInstance = 0;
 const double ACChairCar::sloadFactor = 1.25;
 
-ACChairCar::~ACChairCar(){}
-ACChairCar::ACChairCar(){}
+ACChairCar::~ACChairCar() {}
+ACChairCar::ACChairCar() {}
 
 const ACChairCar &ACChairCar::Type()
 {
@@ -38,13 +38,11 @@ string ACChairCar::GetName() const { return string("ACChairCar"); }
 bool ACChairCar::isAc() const { return true; }
 bool ACChairCar::isLuxury() const { return false; }
 
-
 SecondSitting *SecondSitting::sInstance = 0;
 const double SecondSitting::sloadFactor = 0.5;
 
-
-SecondSitting::~SecondSitting(){}
-SecondSitting::SecondSitting(){}
+SecondSitting::~SecondSitting() {}
+SecondSitting::SecondSitting() {}
 const SecondSitting &SecondSitting::Type()
 {
     if (!sInstance)
@@ -60,10 +58,11 @@ bool SecondSitting::isLuxury() const { return false; }
 ACFirstClass *ACFirstClass::sInstance = 0;
 const double ACFirstClass::sloadFactor = 3.00;
 
-ACFirstClass::~ACFirstClass(){}
-ACFirstClass::ACFirstClass(){}
+ACFirstClass::~ACFirstClass() {}
+ACFirstClass::ACFirstClass() {}
 
-const ACFirstClass &ACFirstClass::Type(){
+const ACFirstClass &ACFirstClass::Type()
+{
     if (!sInstance)
         sInstance = new ACFirstClass;
     return *sInstance;
@@ -77,10 +76,11 @@ bool ACFirstClass::isLuxury() const { return true; }
 AC2Tier *AC2Tier::sInstance = 0;
 const double AC2Tier::sloadFactor = 2.00;
 
-AC2Tier::~AC2Tier(){}
-AC2Tier::AC2Tier(){}
+AC2Tier::~AC2Tier() {}
+AC2Tier::AC2Tier() {}
 
-const AC2Tier &AC2Tier::Type(){
+const AC2Tier &AC2Tier::Type()
+{
     if (!sInstance)
         sInstance = new AC2Tier;
     return *sInstance;
@@ -94,10 +94,11 @@ bool AC2Tier::isLuxury() const { return false; }
 FirstClass *FirstClass::sInstance = 0;
 const double FirstClass::sloadFactor = 2.00;
 
-FirstClass::~FirstClass(){}
-FirstClass::FirstClass(){}
+FirstClass::~FirstClass() {}
+FirstClass::FirstClass() {}
 
-const FirstClass &FirstClass::Type(){
+const FirstClass &FirstClass::Type()
+{
     if (!sInstance)
         sInstance = new FirstClass;
     return *sInstance;
@@ -111,10 +112,11 @@ bool FirstClass::isLuxury() const { return true; }
 AC3Tier *AC3Tier::sInstance = 0;
 const double AC3Tier::sloadFactor = 1.75;
 
-AC3Tier::AC3Tier(){}
-AC3Tier::~AC3Tier(){}
+AC3Tier::AC3Tier() {}
+AC3Tier::~AC3Tier() {}
 
-const AC3Tier &AC3Tier::Type(){
+const AC3Tier &AC3Tier::Type()
+{
     if (!sInstance)
         sInstance = new AC3Tier;
     return *sInstance;
@@ -128,10 +130,11 @@ bool AC3Tier::isLuxury() const { return false; }
 Sleeper *Sleeper::sInstance = 0;
 const double Sleeper::sloadFactor = 1.00;
 
-Sleeper::Sleeper(){}
-Sleeper::~Sleeper(){}
+Sleeper::Sleeper() {}
+Sleeper::~Sleeper() {}
 
-const Sleeper &Sleeper::Type(){
+const Sleeper &Sleeper::Type()
+{
     if (!sInstance)
         sInstance = new Sleeper;
     return *sInstance;
