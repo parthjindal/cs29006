@@ -4,6 +4,7 @@
 
 
 #include<string>
+#include<iostream>
 using namespace std;
 
 
@@ -11,42 +12,37 @@ using namespace std;
 class BookingClass{
 public:
     BookingClass();
-    virtual ~BookingClass() = 0;
     virtual double GetLoadFactor() const = 0;
     virtual string GetName() const = 0;
     virtual bool isSitting() const = 0;
     virtual bool isAc() const = 0;
     virtual int GetNumberOfTiers() const = 0;
-    virtual bool isLuxury() const = 0;
+    virtual bool isLuxury() const = 0; 
+    friend ostream& operator<<(ostream&,const BookingClass&);
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
 class Seat:public BookingClass{
     public:
     virtual bool isSitting() const;
-    virtual ~Seat();
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
 class Berth:public BookingClass{
     public:
     virtual bool isSitting() const;
-    virtual ~Berth();
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
 class Berth2Tier:public Berth{
     public:
     virtual int GetNumberOfTiers() const;
-    virtual ~Berth2Tier();
-
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
 class Berth3Tier:public Berth{
     public:
     virtual int GetNumberOfTiers() const;
-    virtual ~Berth3Tier();
 };
 
 /**********CLASS Declaration***************************/
@@ -56,6 +52,7 @@ class ACChairCar: public Seat{
     static ACChairCar* sInstance;
     
     public:
+    ~ACChairCar();
     const static ACChairCar& Type();
     int GetNumberOfTiers() const ;
     double GetLoadFactor() const ;
@@ -112,7 +109,7 @@ class FirstClass:public Berth2Tier{
     FirstClass();
     static FirstClass* sInstance;
     public:
-    const static FirstClass& GetInstance();
+    const static FirstClass& Type();
     double GetLoadFactor() const;
     string GetName() const;
     bool isAc() const;
