@@ -6,34 +6,35 @@
 #include "Date.h"
 #include "Passenger.h"
 #include <vector>
-using namespace std;
 
 class Booking
 {
 
 protected:
+    
     const Station fromStation_;
     const Station toStation_;
     const BookingClass &bookingClass_;
-    int PNR_;
-    int fare_;
-    Passenger *passenger_;
-    bool bookingStatus_;
-    string bookingMessage_;
     const Date date_;
-
-    static double sBaseFarePerKM;
+    const Passenger * const passenger_;
+    const int PNR_;
+    int fare_;
+    bool bookingStatus_;
+    std::string bookingMessage_;
 
     static int sBookingPNRSerial;
+
+public:
+
+    static double sBaseFarePerKM;
     static double sACSurcharge;
     static double sLuxuryTaxPercent;
 
-public:
-    Booking(const Station, const Station, const Date &, const BookingClass &);
+    Booking(const Station&, const Station&, const Date &, const BookingClass &,const Passenger* const p);
     virtual ~Booking();
     virtual int ComputeFare();
-    static vector<Booking *> sBookings;
-    friend ostream &operator<<(ostream &, const Booking &);
+    static std::vector<const Booking *> sBookings;
+    friend std::ostream &operator<<(std::ostream &, const Booking &);
 };
 
 #endif

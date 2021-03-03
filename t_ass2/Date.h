@@ -1,8 +1,10 @@
 #ifndef __DATE_H
 #define __DATE_H
+
 #include <iostream>
 #include<string>
 #include<vector>
+
 
 class Date{
 
@@ -27,7 +29,7 @@ class Date{
     UINT year_;
 
 public:
-    Date(UINT, UINT, UINT);
+    Date(UINT = 1, UINT = 1, UINT = 2021);
     Date(const Date&);
     Date &operator=(const Date &);
     ~Date(){};

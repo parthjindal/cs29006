@@ -1,26 +1,21 @@
 #include "Booking.h"
 #include <math.h>
 
-Booking::Booking(const Station x, const Station y,
-                 const Date &d, const BookingClass &b) : fromStation_(x), toStation_(y),
-                                                         date_(d), bookingClass_(b), passenger_(0)
+Booking::Booking(const Station &x, const Station &y,
+                 const Date &d, const BookingClass &b,const Passenger* const p = NULL) : fromStation_(x), toStation_(y),
+                                                         date_(d), bookingClass_(b), passenger_(p),PNR_(sBookingPNRSerial)
 {
-    fare_ = ComputeFare();
-
-    sBookingPNRSerial += 1;
-    PNR_ = sBookingPNRSerial;
     bookingStatus_ = true;
     bookingMessage_ = string("BOOKING SUCCEEDED");
-
+    fare_ = ComputeFare();
+    sBookingPNRSerial += 1;
     sBookings.push_back(this);
+
 }
 
 Booking::~Booking() {}
-double Booking::sBaseFarePerKM = 0.50;
 vector<Booking *> Booking::sBookings = {};
-double Booking::sACSurcharge = 50.00;
-double Booking::sLuxuryTaxPercent = 0.25;
-int Booking::sBookingPNRSerial = 0;
+int Booking::sBookingPNRSerial = 1;
 
 int Booking::ComputeFare()
 {

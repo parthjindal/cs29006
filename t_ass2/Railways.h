@@ -1,4 +1,4 @@
-#ifndef __RAILWAYS_H
+#ifndef __RAILWAYS_H //Control inclusion of header files
 #define __RAILWAYS_H
 
 #include "Station.h"
@@ -10,21 +10,20 @@
 #include <iostream>
 
 /****************CLASS Declaration*************************/
-class Railways
-{
+class Railways {
 
-    static std::vector<Station> sStations;
-    static std::map<std::pair<std::string, std::string>, int> sDistStations;
+	static std::vector<const Station> sStations;
+	static std::map<std::pair<const std::string, const std::string>, int> sDistStations;
 
-    //CONSTRUCTORS
-    // -----------
-    Railways();                 //private ctor
-    ~Railways();
-    Railways(const Railways &); //block cctor
+	//CONSTRUCTORS
+	// -----------
+	Railways();                 //private ctor
+	~Railways();
+	Railways(const Railways &); //block cctor
 
 public:
-    const static Railways &railways();
-    int GetDistance(const Station &, const Station &) const;
+	const static Railways &railways();
+	int GetDistance(const Station &, const Station &) const;
 };
 
 #endif //__RAILWATS_H

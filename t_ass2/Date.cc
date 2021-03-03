@@ -1,8 +1,9 @@
 #include "Date.h"
 using namespace std;
 
-Date::Date(unsigned int d = 1, unsigned int m = 1,
-           unsigned int y = 1970) : date_(d), month_(Month(m)), year_(y) {}
+Date::Date(unsigned int d, unsigned int m,
+           unsigned int y) : date_(d), month_(Month(m)), year_(y) {}
+
 Date::Date(const Date &d)
 {
     date_ = d.date_;

@@ -1,26 +1,27 @@
 #include "Railways.h"
 
-vector<Station> Railways::sStations = {Station("Mumbai"), Station("Delhi"),
-                                       Station("Kolkata"), Station("Bangalore"), Station("Chennai")};
+using namespace std;
 
-map<pair<string, string>, int> Railways::sDistStations = {
-    {{"Mumbai", "Delhi"}, 1447},
-    {{"Mumbai", "Bangalore"}, 981},
-    {{"Mumbai", "Kolkata"}, 2014},
-    {{"Mumbai", "Chennai"}, 1338}
-};
+vector<const Station> Railways::sStations = {Station("Mumbai"), Station("Delhi"),
+                                             Station("Kolkata"), Station("Bangalore"), Station("Chennai")
+                                            };
+Railways::Railways() {
+    sDistStations[ {"Mumbai", "Delhi"}] = 1447;
+    sDistStations[ {"Delhi","Mumbai"} ] = 1447;
+    
+}
 
-Railways::Railways() {};
+Railways::~Railways() {
+
+}
+
 int Railways::GetDistance(const Station &x, const Station &y) const
 {
     return Railways::sDistStations.at({x.GetName(), y.GetName()});
 }
 
-const Railways &Railways::railways()
-{
-    if (instance == 0)
-    {
-        instance = new Railways();
-    }
-    return *instance;
+const Railways &Railways::railways() {
+
+    static const Railways indianRailways; //Local Static Singleton
+    return indianRailways;
 }
