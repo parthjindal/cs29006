@@ -1,11 +1,24 @@
 #include "Station.h"
 #include "Railways.h"
 
+using namespace std;
+
+//CONSTRUCTORS
+//------------
 Station::Station(const string &x) : name(x) {}
-string Station::GetName () const{ return name; }
+Station::Station(const Station&x) : name(x.name) {}
+
+//DESTRUCTOR
+//----------
+Station::~Station(){}
+
+
+string Station::GetName () const{ 
+	return name; //Station name
+}
 
 int Station::GetDistance(const Station& x) const{
-    return (Railways::railways()).GetDistance(*this,x);
+    return Railways::railways().GetDistance(*this,x); 
 }
 
 ostream& operator<<(ostream& os,const Station& x){

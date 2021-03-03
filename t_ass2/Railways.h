@@ -13,17 +13,16 @@
 class Railways
 {
 
-    static vector<Station> sStations;
-    static map<pair<string, string>, int> sDistStations;
+    static std::vector<Station> sStations;
+    static std::map<std::pair<std::string, std::string>, int> sDistStations;
 
     //CONSTRUCTORS
     // -----------
     Railways();                 //private ctor
+    ~Railways();
     Railways(const Railways &); //block cctor
-    static Railways *instance;
 
 public:
-    ~Railways();
     const static Railways &railways();
     int GetDistance(const Station &, const Station &) const;
 };

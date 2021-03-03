@@ -1,6 +1,5 @@
 #include "Railways.h"
 
-Railways *Railways::instance = 0;
 vector<Station> Railways::sStations = {Station("Mumbai"), Station("Delhi"),
                                        Station("Kolkata"), Station("Bangalore"), Station("Chennai")};
 
@@ -11,7 +10,7 @@ map<pair<string, string>, int> Railways::sDistStations = {
     {{"Mumbai", "Chennai"}, 1338}
 };
 
-Railways::Railways() {}
+Railways::Railways() {};
 int Railways::GetDistance(const Station &x, const Station &y) const
 {
     return Railways::sDistStations.at({x.GetName(), y.GetName()});
