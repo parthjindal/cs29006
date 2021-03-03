@@ -3,147 +3,141 @@
 
 #include<string>
 #include<iostream>
-using namespace std;
 
 
 /**********ABSTRACT CLASS Declaration*******************/
-class BookingClass{
+class BookingClass {
+protected:
+    BookingClass(const std::string&, bool, bool);
+    virtual ~BookingClass();
+    const std::string name_;
+    const bool isAC_;
+    const bool isLuxury_;
 public:
     virtual double GetLoadFactor() const = 0;
-    virtual string GetName() const = 0;
+    std::string GetName() const ;
     virtual bool isSitting() const = 0;
-    virtual bool isAc() const = 0;
+    bool isAc() const;
     virtual int GetNumberOfTiers() const = 0;
-    virtual bool isLuxury() const = 0; 
-    friend ostream& operator<<(ostream&,const BookingClass&);
+    bool isLuxury() const ;
+    friend std::ostream& operator<<(std::ostream&, const BookingClass&);
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
-class Seat:public BookingClass{
-    public:
+class Seat: public BookingClass {
+protected:
+    Seat(const std::string&, bool, bool);
+    virtual ~Seat();
+public:
     virtual bool isSitting() const;
     virtual int GetNumberOfTiers() const;
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
-class Berth:public BookingClass{
-    public:
+class Berth: public BookingClass {
+protected:
+    Berth(const std::string&, bool, bool);
+    virtual ~Berth();
+public:
     virtual bool isSitting() const;
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
-class Berth2Tier:public Berth{
-    public:
+class Berth2Tier: public Berth {
+protected:
+    Berth2Tier(const std::string&, bool, bool);
+    virtual ~Berth2Tier();
+public:
     virtual int GetNumberOfTiers() const;
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
-class Berth3Tier:public Berth{
-    public:
+class Berth3Tier: public Berth {
+protected:
+    Berth3Tier(const std::string&, bool, bool);
+    virtual ~Berth3Tier();
+public:
     virtual int GetNumberOfTiers() const;
 };
 
 /**********CLASS Declaration***************************/
-class ACChairCar: public Seat{
+class ACChairCar: public Seat {
+
+private:
     static const double sloadFactor;
-    ACChairCar();
-    static ACChairCar* sInstance;
-    
-    public:
+    ACChairCar(const std::string&, bool, bool);
     ~ACChairCar();
+public:
+    double GetLoadFactor() const;
     const static ACChairCar& Type();
-    double GetLoadFactor() const ;
-    string GetName() const ;
-    bool isAc() const ;
-    bool isLuxury() const ;
 };
 
 /**********CLASS Declaration***************************/
-class SecondSitting: public Seat{
+class SecondSitting: public Seat {
+private:
     static const double sloadFactor;
-    SecondSitting();
-    static SecondSitting* sInstance;
-    
-    public:
+    SecondSitting(const std::string&,bool,bool);
     ~SecondSitting();
+public:
+    double GetLoadFactor() const;
     const static SecondSitting& Type();
-    double GetLoadFactor() const ;
-    string GetName() const ;
-    bool isAc() const ;
-    bool isLuxury() const ;
 };
 
 /**********CLASS Declaration***************************/
-class ACFirstClass:public Berth2Tier{
+class ACFirstClass: public Berth2Tier {
+
+private:
     static const double sloadFactor;
-    ACFirstClass();
-    static ACFirstClass* sInstance;
-    
-    public:
+    ACFirstClass(const std::string&,bool,bool);
     ~ACFirstClass();
+public:
+    double GetLoadFactor() const;
     const static ACFirstClass& Type();
-    double GetLoadFactor() const ;
-    string GetName() const ;
-    bool isAc() const ;
-    bool isLuxury() const ;
 };
 
 /**********CLASS Declaration***************************/
-class AC2Tier:public Berth2Tier{
+class AC2Tier: public Berth2Tier {
+private:
     static const double sloadFactor;
-    AC2Tier();
-    static AC2Tier* sInstance;
-    public:
+    AC2Tier(const std::string&,bool,bool);
     ~AC2Tier();
+public:
+    double GetLoadFactor() const;
     const static AC2Tier& Type();
-    double GetLoadFactor() const ;
-    string GetName() const ;
-    bool isAc() const;
-    bool isLuxury() const;
 };
 
 /**********CLASS Declaration***************************/
-class FirstClass:public Berth2Tier{
+class FirstClass: public Berth2Tier {
+private:
     static const double sloadFactor;
-    FirstClass();
-    static FirstClass* sInstance;
-    public:
+    FirstClass(const std::string&,bool,bool);
     ~FirstClass();
+public:
+    double GetLoadFactor() const;
     const static FirstClass& Type();
-    double GetLoadFactor() const;
-    string GetName() const;
-    bool isAc() const;
-    bool isLuxury() const;
 };
 
 /**********CLASS Declaration***************************/
-class AC3Tier:public Berth3Tier{
+class AC3Tier: public Berth3Tier {
+private:
     static const double sloadFactor;
-    AC3Tier();
-    static AC3Tier* sInstance;
-    public:
+    AC3Tier(const std::string&,bool,bool);
     ~AC3Tier();
-    const static AC3Tier& Type();
+public:
     double GetLoadFactor() const;
-    string GetName() const;
-    bool isAc() const;
-    bool isLuxury() const;
+    const static AC3Tier& Type();
 };
 
 /**********CLASS Declaration***************************/
-class Sleeper:public Berth3Tier{
+class Sleeper: public Berth3Tier {
+private:
     static const double sloadFactor;
-    Sleeper();
-    static Sleeper* sInstance;
-    public:
+    Sleeper(const std::string&,bool,bool);
     ~Sleeper();
-    const static Sleeper& Type();
+public:
     double GetLoadFactor() const;
-    string GetName() const;
-    bool isAc() const;
-    bool isLuxury() const;
+    const static Sleeper& Type();
 };
-
 
 
 #endif // __BOOKING_CLASS_H

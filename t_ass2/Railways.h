@@ -7,6 +7,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <utility>
 #include <iostream>
 
 /****************CLASS Declaration*************************/
@@ -14,6 +15,7 @@ class Railways {
 
 	static std::vector<const Station> sStations;
 	static std::map<std::pair<const std::string, const std::string>, int> sDistStations;
+	void addDistances(const std::string&, const std::string&, int);
 
 	//CONSTRUCTORS
 	// -----------

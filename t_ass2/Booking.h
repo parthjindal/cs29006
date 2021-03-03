@@ -11,7 +11,7 @@ class Booking
 {
 
 protected:
-    
+
     const Station fromStation_;
     const Station toStation_;
     const BookingClass &bookingClass_;
@@ -30,7 +30,7 @@ public:
     static double sACSurcharge;
     static double sLuxuryTaxPercent;
 
-    Booking(const Station&, const Station&, const Date &, const BookingClass &,const Passenger* const p);
+    Booking(const Station&, const Station&, const Date &, const BookingClass &,const Passenger* const p = NULL);
     virtual ~Booking();
     virtual int ComputeFare();
     static std::vector<const Booking *> sBookings;

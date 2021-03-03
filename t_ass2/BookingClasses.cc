@@ -1,7 +1,25 @@
 #include "BookingClasses.h"
 
-ostream &operator<<(ostream &os, const BookingClass &x)
-{
+using namespace std;
+
+BookingClass::BookingClass(const string &name,
+                           bool isAC, bool isLuxury) : name_(name),
+                                                       isAC_(isAC), isLuxury_(isLuxury) {}
+BookingClass::~BookingClass() {}
+
+string BookingClass::GetName() const{
+    return name_;
+}
+
+bool BookingClass::isAc() const{
+    return isAC_;
+}
+
+bool BookingClass::isLuxury() const{
+    return isLuxury_;
+}
+
+ostream &operator<<(ostream &os, const BookingClass &x){
     os << "Travel Class = " << x.GetName() << "\n";
     string _isSitting = x.isSitting() ? "Sitting" : "Sleeping";
     string _isAc = x.isAc() ? "AC" : "Non-AC";
@@ -12,135 +30,105 @@ ostream &operator<<(ostream &os, const BookingClass &x)
     os << " : Luxury: " << _isLuxury;
     return os;
 }
+Seat::Seat(const string &name, bool isAC, bool isLuxury) : BookingClass(name, isAC, isLuxury) {}
+Seat::~Seat() {}
 
-bool Seat::isSitting() const { return true; }
-int Seat::GetNumberOfTiers() const { return 0; }
+bool Seat::isSitting() const{
+    return true;
+}
 
-bool Berth::isSitting() const { return false; }
+int Seat::GetNumberOfTiers() const{
+    return 0;
+}
+
+Berth::Berth(const string &name, bool isAC, bool isLuxury) : BookingClass(name, isAC, isLuxury) {}
+Berth::~Berth() {}
+
+bool Berth::isSitting() const{
+    return false;
+}
+
+Berth2Tier::Berth2Tier(const string &name, bool isAC, bool isLuxury) : Berth(name, isAC, isLuxury) {}
+Berth2Tier::~Berth2Tier() {}
 
 int Berth2Tier::GetNumberOfTiers() const { return 2; }
+
+Berth3Tier::Berth3Tier(const string &name, bool isAC, bool isLuxury) : Berth(name, isAC, isLuxury) {}
+Berth3Tier::~Berth3Tier() {}
 int Berth3Tier::GetNumberOfTiers() const { return 3; }
 
-ACChairCar *ACChairCar::sInstance = 0;
-const double ACChairCar::sloadFactor = 1.25;
-
+ACChairCar::ACChairCar(const string &name, bool isAC, bool isLuxury) : Seat(name, isAC, isLuxury) {}
 ACChairCar::~ACChairCar() {}
-ACChairCar::ACChairCar() {}
 
 const ACChairCar &ACChairCar::Type()
 {
-    if (!sInstance)
-        sInstance = new ACChairCar();
-    return *sInstance;
+    const static ACChairCar obj("AC Chair Car", true, false);
+    return obj;
 }
+
 double ACChairCar::GetLoadFactor() const { return sloadFactor; }
-string ACChairCar::GetName() const { return string("ACChairCar"); }
-bool ACChairCar::isAc() const { return true; }
-bool ACChairCar::isLuxury() const { return false; }
 
-SecondSitting *SecondSitting::sInstance = 0;
-const double SecondSitting::sloadFactor = 0.5;
-
+SecondSitting::SecondSitting(const string &name, bool isAC, bool isLuxury) : Seat(name, isAC, isLuxury) {}
 SecondSitting::~SecondSitting() {}
-SecondSitting::SecondSitting() {}
+
 const SecondSitting &SecondSitting::Type()
 {
-    if (!sInstance)
-        sInstance = new SecondSitting;
-    return *sInstance;
+    const static SecondSitting obj("Second Sitting", false, false);
+    return obj;
 }
 
 double SecondSitting::GetLoadFactor() const { return sloadFactor; }
-string SecondSitting::GetName() const { return string("SecondSitting"); }
-bool SecondSitting::isAc() const { return false; }
-bool SecondSitting::isLuxury() const { return false; }
 
-ACFirstClass *ACFirstClass::sInstance = 0;
-const double ACFirstClass::sloadFactor = 3.00;
-
+ACFirstClass::ACFirstClass(const string &name, bool isAC, bool isLuxury) : Berth2Tier(name, isAC, isLuxury) {}
 ACFirstClass::~ACFirstClass() {}
-ACFirstClass::ACFirstClass() {}
 
 const ACFirstClass &ACFirstClass::Type()
 {
-    if (!sInstance)
-        sInstance = new ACFirstClass;
-    return *sInstance;
+    const static ACFirstClass obj("AC First Class", true, true);
+    return obj;
 }
 
 double ACFirstClass::GetLoadFactor() const { return sloadFactor; }
-string ACFirstClass::GetName() const { return string("ACFirstClass"); }
-bool ACFirstClass::isAc() const { return true; }
-bool ACFirstClass::isLuxury() const { return true; }
 
-AC2Tier *AC2Tier::sInstance = 0;
-const double AC2Tier::sloadFactor = 2.00;
-
+AC2Tier::AC2Tier(const string &name, bool isAC, bool isLuxury) : Berth2Tier(name, isAC, isLuxury) {}
 AC2Tier::~AC2Tier() {}
-AC2Tier::AC2Tier() {}
 
 const AC2Tier &AC2Tier::Type()
 {
-    if (!sInstance)
-        sInstance = new AC2Tier;
-    return *sInstance;
+    const static AC2Tier obj("AC 2 Tier", true, false);
+    return obj;
 }
 
 double AC2Tier::GetLoadFactor() const { return sloadFactor; }
-string AC2Tier::GetName() const { return string("AC2Tier"); }
-bool AC2Tier::isAc() const { return true; }
-bool AC2Tier::isLuxury() const { return false; }
 
-FirstClass *FirstClass::sInstance = 0;
-const double FirstClass::sloadFactor = 2.00;
-
+FirstClass::FirstClass(const string &name, bool isAC, bool isLuxury) : Berth2Tier(name, isAC, isLuxury) {}
 FirstClass::~FirstClass() {}
-FirstClass::FirstClass() {}
 
 const FirstClass &FirstClass::Type()
 {
-    if (!sInstance)
-        sInstance = new FirstClass;
-    return *sInstance;
+    const static FirstClass obj("First Class", false, false);
+    return obj;
 }
-
 double FirstClass::GetLoadFactor() const { return sloadFactor; }
-string FirstClass::GetName() const { return string("FirstClass"); }
-bool FirstClass::isAc() const { return false; }
-bool FirstClass::isLuxury() const { return true; }
 
-AC3Tier *AC3Tier::sInstance = 0;
-const double AC3Tier::sloadFactor = 1.75;
-
-AC3Tier::AC3Tier() {}
+AC3Tier::AC3Tier(const string &name, bool isAC, bool isLuxury) : Berth3Tier(name, isAC, isLuxury) {}
 AC3Tier::~AC3Tier() {}
 
 const AC3Tier &AC3Tier::Type()
 {
-    if (!sInstance)
-        sInstance = new AC3Tier;
-    return *sInstance;
+    const static AC3Tier obj("AC 3 Tier", true, false);
+    return obj;
 }
 
 double AC3Tier::GetLoadFactor() const { return sloadFactor; }
-string AC3Tier::GetName() const { return string("AC3Tier"); }
-bool AC3Tier::isAc() const { return false; }
-bool AC3Tier::isLuxury() const { return false; }
 
-Sleeper *Sleeper::sInstance = 0;
-const double Sleeper::sloadFactor = 1.00;
-
-Sleeper::Sleeper() {}
+Sleeper::Sleeper(const string &name, bool isAC, bool isLuxury) : Berth3Tier(name, isAC, isLuxury) {}
 Sleeper::~Sleeper() {}
 
 const Sleeper &Sleeper::Type()
 {
-    if (!sInstance)
-        sInstance = new Sleeper;
-    return *sInstance;
+    const static Sleeper obj("Sleeper", false, false);
+    return obj;
 }
 
 double Sleeper::GetLoadFactor() const { return sloadFactor; }
-string Sleeper::GetName() const { return string("Sleeper"); }
-bool Sleeper::isAc() const { return false; }
-bool Sleeper::isLuxury() const { return false; }

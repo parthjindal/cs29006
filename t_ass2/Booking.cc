@@ -1,8 +1,9 @@
 #include "Booking.h"
 #include <math.h>
+using namespace std;
 
 Booking::Booking(const Station &x, const Station &y,
-                 const Date &d, const BookingClass &b,const Passenger* const p = NULL) : fromStation_(x), toStation_(y),
+                 const Date &d, const BookingClass &b,const Passenger* const p) : fromStation_(x), toStation_(y),
                                                          date_(d), bookingClass_(b), passenger_(p),PNR_(sBookingPNRSerial)
 {
     bookingStatus_ = true;
@@ -14,7 +15,7 @@ Booking::Booking(const Station &x, const Station &y,
 }
 
 Booking::~Booking() {}
-vector<Booking *> Booking::sBookings = {};
+vector<const Booking *> Booking::sBookings;
 int Booking::sBookingPNRSerial = 1;
 
 int Booking::ComputeFare()
