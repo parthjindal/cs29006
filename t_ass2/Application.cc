@@ -1,8 +1,8 @@
 #include "Booking.h"
 
-double Booking::sBaseFarePerKM = 0.50;
-double Booking::sACSurcharge = 50.00;
-double Booking::sLuxuryTaxPercent = 0.25;
+const double Booking::sBaseFarePerKM = 0.50;
+const double Booking::sACSurcharge = 50.00;
+const double Booking::sLuxuryTaxPercent = 0.25;
 
 const double ACChairCar::sloadFactor = 1.25;
 const double SecondSitting::sloadFactor = 0.5;
@@ -14,15 +14,24 @@ const double Sleeper::sloadFactor = 1.00;
 
 using namespace std;
 
-int main(){
-    
-    Booking b1(Station("Mumbai"), Station("Delhi"), Date(4, 3, 2021), ACFirstClass::Type());
-    Booking b2(Station("Mumbai"), Station("Delhi"), Date(16, 2, 2021), Sleeper::Type());
-    Booking b3(Station("Mumbai"), Station("Delhi"), Date(1, 12, 2001), ACChairCar::Type());
+void TestApplication(){
 
-    vector<const Booking*>::const_iterator it;
-    for(it = Booking::sBookings.begin(); it < Booking::sBookings.end();++it){
-        cout << *(*it) <<"\n";
+    Booking b1(Station("Mumbai"), Station("Delhi"), Date(15, 2, 2021), ACFirstClass::Type());
+    Booking b2(Station("Kolkata"), Station("Delhi"), Date(5, 3, 2021), AC2Tier::Type());
+    Booking b3(Station("Mumbai"), Station("Kolkata"), Date(17, 3, 2021), FirstClass::Type());
+    Booking b4(Station("Mumbai"), Station("Delhi"), Date(23, 3, 2021), AC3Tier::Type());
+    Booking b5(Station("Chennai"), Station("Delhi"), Date(25, 4, 2021), ACChairCar::Type());
+    Booking b6(Station("Chennai"), Station("Kolkata"), Date(7, 5, 2021), Sleeper::Type());
+    Booking b7(Station("Mumbai"), Station("Delhi"), Date(19, 5, 2021), SecondSitting::Type());
+    Booking b8(Station("Delhi"), Station("Mumbai"), Date(22, 5, 2021), SecondSitting::Type());
+
+    vector<const Booking *>::const_iterator it;
+    for (it = Booking::sBookings.begin(); it < Booking::sBookings.end(); ++it)
+    {
+        cout << *(*it) << "\n";
     }
+}
 
+int main(){
+    TestApplication();
 }

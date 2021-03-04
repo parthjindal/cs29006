@@ -123,6 +123,8 @@ private:
 public:
     double GetLoadFactor() const;
     static const ACChairCar& Type();
+
+    static void UnitTestACChairCar();
 };
 
 /**********CLASS Declaration***************************/
@@ -140,13 +142,11 @@ private:
 public:
     double GetLoadFactor() const;
     static const SecondSitting& Type();
+
+    static void UnitTestSecondSitting();
 };
 
 /**********CLASS Declaration***************************/
-/*
-
-
-*/
 class ACFirstClass: public Berth2Tier {
 
 private:
@@ -162,6 +162,8 @@ private:
 public:
     double GetLoadFactor() const;
     static const ACFirstClass& Type();
+
+    static void UnitTestACFirstClass();
 };
 
 /**********CLASS Declaration***************************/
@@ -179,6 +181,8 @@ private:
 public:
     double GetLoadFactor() const;
     static const AC2Tier& Type();
+
+    static void UnitTestAC2Tier();
 };
 
 /**********CLASS Declaration***************************/
@@ -198,6 +202,8 @@ private:
 public:
     double GetLoadFactor() const; //Local static const Instance
     static const FirstClass& Type();
+
+    static void UnitTestFirstClass();
 };
 
 /**********CLASS Declaration***************************/
@@ -217,6 +223,8 @@ private:
 public:
     double GetLoadFactor() const;
     static const AC3Tier& Type();
+
+    static void UnitTestAC3Tier();
 };
 
 /**********CLASS Declaration***************************/
@@ -237,6 +245,8 @@ private:
 public:
     double GetLoadFactor() const;
     static const Sleeper& Type();
+
+    static void UnitTestSleeper();
 };
 
 
