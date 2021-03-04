@@ -1,10 +1,16 @@
+// **** Station class implementation
+// **** Author: Parth Jindal
+// **** Date: 1 March 2021
+// **** Roll no.: 19CS30033
+
+
+/**************** Project Headers ********************/
 #include "Station.h"
 #include "Railways.h"
 
 using namespace std;
 
-//CONSTRUCTORS
-//------------
+// **** constructors
 Station::Station(const string &x) : name(x) {
     #if _DEBUG
         cout << "Station constructed\n"; 
@@ -12,8 +18,7 @@ Station::Station(const string &x) : name(x) {
 }
 Station::Station(const Station&x) : name(x.name) {}
 
-//DESTRUCTOR
-//----------
+// **** destructor
 Station::~Station(){
     #if _DEBUG
         cout << "Station destructed\n"; 
@@ -35,6 +40,7 @@ ostream& operator<<(ostream& os,const Station& x){
     return os;
 }
 
+//TODO
 void Station::UnitTestStation(){
     Station s1("Mumbai");
     Station s2 = s1;
