@@ -13,6 +13,7 @@ const double AC3Tier::sloadFactor = 1.75;
 const double Sleeper::sloadFactor = 1.00;
 
 using namespace std;
+
 int main(){
     
     Booking b1(Station("Mumbai"), Station("Delhi"), Date(15, 2, 2021), ACFirstClass::Type());

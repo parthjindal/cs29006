@@ -22,7 +22,8 @@ class Date{
         Nov,
         Dec
     };
-    static std::vector<std::string> months;
+    static const std::vector<const std::string> months;
+    static const std::vector<const std::string> days;
     typedef unsigned int UINT;
     UINT date_;
     Month month_;

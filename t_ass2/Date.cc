@@ -12,10 +12,16 @@ Date::Date(const Date &d)
 }
 
 
-vector<string> Date::months = {
+const vector<const string> Date::months = {
     "Jan", "Feb", "Mar", "Apr",
     "May", "Jun", "Jul", "Aug", "Sep",
     "Oct", "Nov", "Dec"};
+
+const vector<const string> Date::days = {
+    "Monday","Tuesday","Wednesday",
+    "Thursday","Friday","Saturday",
+    "Sunday"
+};
 
 ostream &operator<<(ostream &os, const Date &date)
 {

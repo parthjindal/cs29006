@@ -4,20 +4,12 @@ using namespace std;
 
 BookingClass::BookingClass(const string &name,
                            bool isAC, bool isLuxury) : name_(name),
-                                                       isAC_(isAC), isLuxury_(isLuxury) {}
+                                                       isAC_(isAC), isLuxury_(isLuxury){}
 BookingClass::~BookingClass() {}
 
-string BookingClass::GetName() const{
-    return name_;
-}
-
-bool BookingClass::isAc() const{
-    return isAC_;
-}
-
-bool BookingClass::isLuxury() const{
-    return isLuxury_;
-}
+string BookingClass::GetName() const{ return name_;}
+bool BookingClass::isAc() const{ return isAC_; }
+bool BookingClass::isLuxury() const{ return isLuxury_; }
 
 ostream &operator<<(ostream &os, const BookingClass &x){
     os << "Travel Class = " << x.GetName() << "\n";
@@ -30,9 +22,13 @@ ostream &operator<<(ostream &os, const BookingClass &x){
     os << " : Luxury: " << _isLuxury;
     return os;
 }
-Seat::Seat(const string &name, bool isAC, bool isLuxury) : BookingClass(name, isAC, isLuxury) {}
-Seat::~Seat() {}
 
+/********************** SEAT CLASS DEFINITION*********************/
+
+Seat::Seat(const string &name, bool isAC,
+           bool isLuxury) : BookingClass(name, isAC, isLuxury) {}
+
+Seat::~Seat() {}
 bool Seat::isSitting() const{
     return true;
 }

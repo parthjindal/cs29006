@@ -7,20 +7,38 @@
 
 /**********ABSTRACT CLASS Declaration*******************/
 class BookingClass {
+
 protected:
+    //CONSTRUCTOR
+    //-----------
     BookingClass(const std::string&, bool, bool);
+    
+    //DESTRUCTOR
+    //----------
     virtual ~BookingClass();
+
     const std::string name_;
-    const bool isAC_;
+    const bool isAC_;  
     const bool isLuxury_;
+
 public:
-    virtual double GetLoadFactor() const = 0;
-    std::string GetName() const ;
-    virtual bool isSitting() const = 0;
-    bool isAc() const;
-    virtual int GetNumberOfTiers() const = 0;
-    bool isLuxury() const ;
-    friend std::ostream& operator<<(std::ostream&, const BookingClass&);
+    
+    std::string GetName() const;              //returns name
+    bool isAc() const;                        //returns true if has AC
+    bool isLuxury() const;                    //returns true if luxury
+
+    //PURE VIRTUAL FUNCTIONS
+    //----------------------
+
+    //returns true if Booking is 'Seat Type' else false
+    virtual bool isSitting() const = 0;    
+
+    /*returns loadFactor of BookingClass.
+    loadFactor to be set in Application.*/ 
+    virtual double GetLoadFactor() const = 0; //returns loadFactor
+    virtual int GetNumberOfTiers() const = 0; 
+    
+    friend std::ostream& operator<<(std::ostream&, const BookingClass&); 
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
@@ -61,6 +79,7 @@ public:
 };
 
 /**********CLASS Declaration***************************/
+// AC Chair Car 
 class ACChairCar: public Seat {
 
 private:
@@ -69,7 +88,7 @@ private:
     ~ACChairCar();
 public:
     double GetLoadFactor() const;
-    const static ACChairCar& Type();
+    static const ACChairCar& Type();
 };
 
 /**********CLASS Declaration***************************/
@@ -80,10 +99,14 @@ private:
     ~SecondSitting();
 public:
     double GetLoadFactor() const;
-    const static SecondSitting& Type();
+    static const SecondSitting& Type();
 };
 
 /**********CLASS Declaration***************************/
+/*
+
+
+*/
 class ACFirstClass: public Berth2Tier {
 
 private:
@@ -92,7 +115,7 @@ private:
     ~ACFirstClass();
 public:
     double GetLoadFactor() const;
-    const static ACFirstClass& Type();
+    static const ACFirstClass& Type();
 };
 
 /**********CLASS Declaration***************************/
@@ -103,7 +126,7 @@ private:
     ~AC2Tier();
 public:
     double GetLoadFactor() const;
-    const static AC2Tier& Type();
+    static const AC2Tier& Type();
 };
 
 /**********CLASS Declaration***************************/
@@ -114,7 +137,7 @@ private:
     ~FirstClass();
 public:
     double GetLoadFactor() const;
-    const static FirstClass& Type();
+    static const FirstClass& Type();
 };
 
 /**********CLASS Declaration***************************/
@@ -125,7 +148,7 @@ private:
     ~AC3Tier();
 public:
     double GetLoadFactor() const;
-    const static AC3Tier& Type();
+    static const AC3Tier& Type();
 };
 
 /**********CLASS Declaration***************************/
@@ -136,7 +159,7 @@ private:
     ~Sleeper();
 public:
     double GetLoadFactor() const;
-    const static Sleeper& Type();
+    static const Sleeper& Type();
 };
 
 

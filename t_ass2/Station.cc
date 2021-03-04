@@ -5,20 +5,29 @@ using namespace std;
 
 //CONSTRUCTORS
 //------------
-Station::Station(const string &x) : name(x) {}
+Station::Station(const string &x) : name(x) {
+    #if _DEBUG
+        cout << "Station constructed\n"; 
+    #endif
+}
 Station::Station(const Station&x) : name(x.name) {}
 
 //DESTRUCTOR
 //----------
-Station::~Station(){}
+Station::~Station(){
+    #if _DEBUG
+        cout << "Station destructed\n"; 
+    #endif
+}
 
 
 string Station::GetName () const{ 
-	return name; //Station name
+	return name;
 }
 
+
 int Station::GetDistance(const Station& x) const{
-    return Railways::railways().GetDistance(*this,x); 
+    return Railways::railways().GetDistance(*this,x); //Railway Singleton.GetDistance 
 }
 
 ostream& operator<<(ostream& os,const Station& x){
