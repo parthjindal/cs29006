@@ -1,6 +1,6 @@
 CC = g++ -std=c++11
 APPFILE = Application
-CCFLAGS = -D_DEBUG
+# CCFLAGS = -D_DEBUG
 DEPS = Station.o Railways.o Date.o BookingClasses.o Booking.o $(APPFILE).o
 
 main: $(DEPS)

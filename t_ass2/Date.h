@@ -1,13 +1,20 @@
-#ifndef __DATE_H
+// **** Date Class definition
+// **** Author: Parth Jindal
+// **** Date: 3 March 2021
+// **** Roll No.: 19CS30033
+
+
+#ifndef __DATE_H //Control inclusion of header files
 #define __DATE_H
 
+/************ C++ Headers ******************/
 #include <iostream>
 #include<string>
 #include<vector>
 
-
 class Date{
-
+    
+    // Month enums
     enum Month{
         Jan = 1,
         Feb,
@@ -22,18 +29,40 @@ class Date{
         Nov,
         Dec
     };
-    static const std::vector<const std::string> months;
-    static const std::vector<const std::string> days;
+    //Day enum
+    enum Day{
+        Mon = 1,
+        Tue,
+        Wed,
+        Thur,
+        Fri,
+        Sat,
+        Sun
+    };
     typedef unsigned int UINT;
-    UINT date_;
+    Day GetDay(); //returns DOW
+    UINT date_; 
     Month month_;
     UINT year_;
+    Day day_; 
+
+    Date &operator=(const Date &); //block 'operator='
 
 public:
-    Date(UINT = 1, UINT = 1, UINT = 2021);
-    Date(const Date&);
-    Date &operator=(const Date &);
-    ~Date(){};
+    //CONSTRUCTOR
+    //-----------
+    Date(UINT = 1, UINT = 1, UINT = 2021); //ctor
+    Date(const Date &);                    //cctor
+
+    //DESTRUCTOR
+    //---------
+    ~Date();
+
+    //static constants
+    //----------------
+    static const std::vector<const std::string> sMonths; //Month Names
+    static const std::vector<const std::string> sDays;   //Day Names
+
     friend std::ostream &operator<<(std::ostream&,const Date&);
 };
 
