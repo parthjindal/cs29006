@@ -8,7 +8,7 @@
 #define __DATE_H
 
 /************ C++ Headers ******************/
-#include <iostream>
+#include <ostream>
 #include<string>
 #include<vector>
 
@@ -31,13 +31,13 @@ class Date{
     };
     //Day enum
     enum Day{
-        Mon = 1,
+        Sun = 0,
+        Mon,
         Tue,
         Wed,
         Thur,
         Fri,
         Sat,
-        Sun
     };
     typedef unsigned int UINT;
     Day GetDay(); //returns DOW
@@ -64,6 +64,7 @@ public:
     static const std::vector<const std::string> sDays;   //Day Names
 
     friend std::ostream &operator<<(std::ostream&,const Date&);
+    static void UnitTestDate();
 };
 
 #endif // __DATE_H
