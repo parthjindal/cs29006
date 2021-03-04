@@ -16,7 +16,7 @@ using namespace std;
 
 int main(){
     
-    Booking b1(Station("Mumbai"), Station("Delhi"), Date(15, 2, 2021), ACFirstClass::Type());
+    Booking b1(Station("Mumbai"), Station("Delhi"), Date(4, 3, 2021), ACFirstClass::Type());
     Booking b2(Station("Mumbai"), Station("Delhi"), Date(16, 2, 2021), Sleeper::Type());
     Booking b3(Station("Mumbai"), Station("Delhi"), Date(1, 12, 2001), ACChairCar::Type());
 

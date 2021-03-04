@@ -102,7 +102,7 @@ FirstClass::~FirstClass() {}
 
 const FirstClass &FirstClass::Type()
 {
-    const static FirstClass obj("First Class", false, false);
+    const static FirstClass obj("First Class", false, true);
     return obj;
 }
 double FirstClass::GetLoadFactor() const { return sloadFactor; }

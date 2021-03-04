@@ -1,5 +1,14 @@
+// **** Booking class Implementation
+// **** Author: Parth Jindal
+// **** Date: 3 March 2021
+// **** Roll no.: 19CS30033
+
+/************ Project Headers *************/
 #include "Booking.h"
+
+/************ C++ Headers *****************/
 #include <math.h>
+
 using namespace std;
 
 Booking::Booking(const Station &x, const Station &y,
@@ -13,27 +22,30 @@ Booking::Booking(const Station &x, const Station &y,
     sBookings.push_back(this);
 
 }
-
+//DESTRUCTOR
+//----------
 Booking::~Booking() {}
+
+// **** static consts
 vector<const Booking *> Booking::sBookings;
 int Booking::sBookingPNRSerial = 1;
 
-int Booking::ComputeFare()
-{
+int Booking::ComputeFare(){ 
+
+    //Business logic
     double fare = sBaseFarePerKM *
                   (static_cast<double>(fromStation_.GetDistance(toStation_)));
     fare *= bookingClass_.GetLoadFactor();
     fare = bookingClass_.isAc() ? (fare + sACSurcharge) : fare;
-    if (bookingClass_.isLuxury())
-    {
+    if (bookingClass_.isLuxury()){
         double luxuryTax = sLuxuryTaxPercent * fare;
         fare += luxuryTax;
     }
     return static_cast<int>(round(fare));
 }
 
-ostream &operator<<(ostream &os, const Booking &booking)
-{
+ostream &operator<<(ostream &os, const Booking &booking){
+    
     os << booking.bookingMessage_ << ":\n";
     os << "PNR Number = " << booking.PNR_ << "\n";
     os << "From Station = " << booking.fromStation_.GetName() << "\n";

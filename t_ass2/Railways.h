@@ -36,8 +36,11 @@ class Railways {
 public:
 	//returns const instance of Railways
 	const static Railways &railways(); 
+
 	//returns distance between two stations
 	int GetDistance(const Station &, const Station &) const;
+	
+	static void UnitTestStation();
 };
 
 #endif //__RAILWATS_H

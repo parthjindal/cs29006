@@ -1,6 +1,13 @@
-#ifndef __BOOKING_CLASS_H
+// **** BookingClass class definition
+// **** Author: Parth Jindal
+// **** Date: 1 March 2021
+// **** Roll no.: 19CS30033
+
+#ifndef __BOOKING_CLASS_H //Control inclusion of header files
 #define __BOOKING_CLASS_H
 
+
+/*************C++ Headers **********************/
 #include<string>
 #include<iostream>
 
@@ -36,15 +43,20 @@ public:
     /*returns loadFactor of BookingClass.
     loadFactor to be set in Application.*/ 
     virtual double GetLoadFactor() const = 0; //returns loadFactor
-    virtual int GetNumberOfTiers() const = 0; 
+    virtual int GetNumberOfTiers() const = 0; //returns No. of tiers
     
-    friend std::ostream& operator<<(std::ostream&, const BookingClass&); 
+    friend std::ostream& operator<<(std::ostream&, const BookingClass&);
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
 class Seat: public BookingClass {
 protected:
+    //CONSTRUCTOR
+    //-----------
     Seat(const std::string&, bool, bool);
+
+    //DESTRUCTOR
+    //----------
     virtual ~Seat();
 public:
     virtual bool isSitting() const;
@@ -54,7 +66,12 @@ public:
 /**********ABSTRACT CLASS Declaration*******************/
 class Berth: public BookingClass {
 protected:
+    //CONSTRUCTOR
+    //-----------
     Berth(const std::string&, bool, bool);
+
+    //DESTRUCTOR
+    //----------
     virtual ~Berth();
 public:
     virtual bool isSitting() const;
@@ -63,7 +80,12 @@ public:
 /**********ABSTRACT CLASS Declaration*******************/
 class Berth2Tier: public Berth {
 protected:
+    //CONSTRUCTOR
+    //-----------
     Berth2Tier(const std::string&, bool, bool);
+
+    //DESTRUCTOR
+    //-----------
     virtual ~Berth2Tier();
 public:
     virtual int GetNumberOfTiers() const;
@@ -72,7 +94,13 @@ public:
 /**********ABSTRACT CLASS Declaration*******************/
 class Berth3Tier: public Berth {
 protected:
+
+//CONSTRUCTOR
+//----------
     Berth3Tier(const std::string&, bool, bool);
+
+//DESTRUCTOR
+//----------
     virtual ~Berth3Tier();
 public:
     virtual int GetNumberOfTiers() const;
@@ -84,7 +112,13 @@ class ACChairCar: public Seat {
 
 private:
     static const double sloadFactor;
+    
+    //CONSTRUCTOR
+    //----------
     ACChairCar(const std::string&, bool, bool);
+    
+    //DESTRUCTOR
+    //----------
     ~ACChairCar();
 public:
     double GetLoadFactor() const;
@@ -95,7 +129,13 @@ public:
 class SecondSitting: public Seat {
 private:
     static const double sloadFactor;
+    
+    //CONSTRUCTOR
+    //----------
     SecondSitting(const std::string&,bool,bool);
+    
+    //DESTRUCTOR
+    //----------
     ~SecondSitting();
 public:
     double GetLoadFactor() const;
@@ -111,7 +151,13 @@ class ACFirstClass: public Berth2Tier {
 
 private:
     static const double sloadFactor;
+    
+    //CONSTRUCTOR
+    //----------
     ACFirstClass(const std::string&,bool,bool);
+    
+    //DESTRUCTOR
+    //----------
     ~ACFirstClass();
 public:
     double GetLoadFactor() const;
@@ -122,7 +168,13 @@ public:
 class AC2Tier: public Berth2Tier {
 private:
     static const double sloadFactor;
+    
+    //CONSTRUCTOR
+    //----------
     AC2Tier(const std::string&,bool,bool);
+    
+    //DESTRUCTOR
+    //----------
     ~AC2Tier();
 public:
     double GetLoadFactor() const;
@@ -133,10 +185,18 @@ public:
 class FirstClass: public Berth2Tier {
 private:
     static const double sloadFactor;
+    
+    //CONSTRUCTOR
+    //----------
     FirstClass(const std::string&,bool,bool);
+    FirstClass(const FirstClass&);            //block cctor
+    FirstClass& operator=(const FirstClass&); //block operator=
+    
+    //DESTRUCTOR
+    //----------
     ~FirstClass();
 public:
-    double GetLoadFactor() const;
+    double GetLoadFactor() const; //Local static const Instance
     static const FirstClass& Type();
 };
 
@@ -144,7 +204,15 @@ public:
 class AC3Tier: public Berth3Tier {
 private:
     static const double sloadFactor;
+    
+    //CONSTRUCTOR
+    //----------
     AC3Tier(const std::string&,bool,bool);
+    AC3Tier(const AC3Tier&); //block cctor
+    AC3Tier& operator=(const AC3Tier&); //block operator=
+    
+    //DESTRUCTOR
+    //----------
     ~AC3Tier();
 public:
     double GetLoadFactor() const;
@@ -155,8 +223,17 @@ public:
 class Sleeper: public Berth3Tier {
 private:
     static const double sloadFactor;
+    
+    //CONSTRUCTOR
+    //----------
     Sleeper(const std::string&,bool,bool);
+    Sleeper(const Sleeper&); //block cctor
+    Sleeper& operator=(const Sleeper&); //block operator=
+
+    //DESTRUCTOR
+    //----------
     ~Sleeper();
+
 public:
     double GetLoadFactor() const;
     static const Sleeper& Type();
