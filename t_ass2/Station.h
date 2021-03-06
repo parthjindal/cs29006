@@ -14,7 +14,7 @@
 /************ CLASS Declaration ******************************/
 class Station{
 
-    const std::string name;        //name
+    const std::string name_;        //name_
     // Station& operator=(const Station&); //block assignment operator
 
 public:
@@ -28,12 +28,12 @@ public:
     //----------
     ~Station(); //dtor
 
-    //returns Station name
+    //returns Station name_
     std::string GetName() const; 
 
     //distance from another station
     int GetDistance(const Station &) const;
-    
+    bool operator==(const Station&);
     friend std::ostream &operator<<(std::ostream &, const Station &);
     static void UnitTestStation(); //Unit test
 };

@@ -11,12 +11,12 @@
 using namespace std;
 
 // **** constructors
-Station::Station(const string &x) : name(x) {
+Station::Station(const string &x) : name_(x) {
     #if _DEBUG
         cout << "Station constructed\n"; 
     #endif
 }
-Station::Station(const Station&x) : name(x.name) {}
+Station::Station(const Station&x) : name_(x.name_) {}
 
 // **** destructor
 Station::~Station(){
@@ -27,7 +27,7 @@ Station::~Station(){
 
 
 string Station::GetName () const{ 
-	return name;
+	return name_;
 }
 
 
@@ -35,7 +35,11 @@ int Station::GetDistance(const Station& x) const{
     return Railways::railways().GetDistance(*this,x); //Railway Singleton.GetDistance 
 }
 
+bool Station::operator==(const Station& x){
+    return (name_ == x.name_);
+}
+
 ostream& operator<<(ostream& os,const Station& x){
-    os <<"Station: " <<x.name;
+    os <<"Station: " <<x.name_;
     return os;
 }

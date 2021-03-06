@@ -64,6 +64,7 @@ public:
     static const std::vector<const std::string> sMonths; //Month Names
     static const std::vector<const std::string> sDays;   //Day Names
 
+    bool operator==(const Date&);
     friend std::ostream &operator<<(std::ostream&,const Date&);
     static void UnitTest();
 };

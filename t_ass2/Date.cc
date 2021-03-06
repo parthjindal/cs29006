@@ -42,6 +42,10 @@ const vector<const string> Date::sMonths = {"Jan", "Feb", "Mar", "Apr",
 const vector<const string> Date::sDays = {"Sun","Mon", "Tue", "Wed",
                                           "Thur", "Fri", "Sat"};
 
+bool Date::operator==(const Date&d){
+    return (date_ == d.date_ && month_ == d.month_ && year_ == d.year_);
+}
+
 ostream &operator<<(ostream &os, const Date &date){
     
     os << Date::sDays[static_cast<int>(date.day_)] << ", " << date.date_

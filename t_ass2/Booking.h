@@ -52,8 +52,7 @@ public:
     virtual int ComputeFare();                     //virtual(future extension ?)
     static std::vector<const Booking *> sBookings; //Booking* array
     friend std::ostream &operator<<(std::ostream &, const Booking &);
-
-    static void UnitTestBooking();
+    static void UnitTest();
 };
 
 #endif

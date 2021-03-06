@@ -34,12 +34,12 @@ void SecondSitting::UnitTest(){
 }
 
 void ACFirstClass::UnitTest(){
-    assert(false == ACFirstClass::Type().isAc());
+    assert(true == ACFirstClass::Type().isAc());
     assert("AC First Class" == ACFirstClass::Type().GetName());
-    assert(false == ACFirstClass::Type().isLuxury());
-    assert(true == ACFirstClass::Type().isSitting());
-    assert(0.5 == ACFirstClass::Type().GetLoadFactor());
-    assert(0 == ACFirstClass::Type().GetNumberOfTiers());
+    assert(true == ACFirstClass::Type().isLuxury());
+    assert(false == ACFirstClass::Type().isSitting());
+    assert(3 == ACFirstClass::Type().GetLoadFactor());
+    assert(2 == ACFirstClass::Type().GetNumberOfTiers());
 }
 
 void AC2Tier::UnitTest(){
@@ -57,7 +57,7 @@ void FirstClass::UnitTest(){
     assert(true == FirstClass::Type().isLuxury());
     assert(false == FirstClass::Type().isSitting());
     assert(2.00 == FirstClass::Type().GetLoadFactor());
-    assert(3 == FirstClass::Type().GetNumberOfTiers());
+    assert(2 == FirstClass::Type().GetNumberOfTiers());
 }
 
 void AC3Tier::UnitTest(){
@@ -79,5 +79,12 @@ void Sleeper::UnitTest(){
 
 
 int main(){
-
+    
+    ACChairCar::UnitTest();
+    SecondSitting::UnitTest();
+    ACFirstClass::UnitTest();
+    AC2Tier::UnitTest();
+    FirstClass::UnitTest();
+    AC3Tier::UnitTest();
+    Sleeper::UnitTest();
 }
