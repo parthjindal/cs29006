@@ -128,6 +128,6 @@ $ ./test4
 - Unit Test for `Booking` class, use the following commands :
 
 ```shell
-$ g++ -std=c++11 Station.cpp Railways.cpp Date.cpp BookingClasses.cpp Booking.cpp UnitTestBooking.cpp -o test
+$ g++ -std=c++11 Station.cpp Railways.cpp Date.cpp BookingClasses.cpp Booking.cpp UnitTestBooking.cpp -o test5
 $ ./test5
 ```
