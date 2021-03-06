@@ -21,7 +21,7 @@ Unit Test file for `Station` class.
 Header file for the singleton `Railways` class.
 
 - **Railways.cpp**  
-Source file for singletong `Railways` class.\\n
+Source file for singletong `Railways` class.\n
 Contains Master Data of Stations and their distances.
 
 - **UnitTestRailways.cpp**  
@@ -56,7 +56,7 @@ Source file for the `Booking` class.
 Unit Test file for the `Booking` class.
 
 - **Passenger.h**  
-Header file for abstract `Passenger` class.\\n
+Header file for abstract `Passenger` class.\n
 (Not implemented,For future extensions)
 
 - **ApplicationTestGiven.cpp**  
@@ -70,7 +70,7 @@ A simple makefile to compile and build the project.
 
 ## Compiler Used
 
-GNU GCC compiler used.\\n
+GNU GCC compiler used.\n
 C++11 Standard followed.
 
 
