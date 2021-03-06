@@ -25,10 +25,12 @@ void TestApplication(){
     Booking b7(Station("Mumbai"), Station("Delhi"), Date(19, 5, 2021), SecondSitting::Type());
     Booking b8(Station("Delhi"), Station("Mumbai"), Date(22, 5, 2021), SecondSitting::Type());
 
+
+
     vector<const Booking *>::const_iterator it;
     for (it = Booking::sBookings.begin(); it < Booking::sBookings.end(); ++it)
     {
-        cout << *(*it) << "\n";
+        cout << *(*it) << "\n\n";
     }
 }
 

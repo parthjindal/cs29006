@@ -9,9 +9,9 @@ using namespace std;
 
 void Railways::UnitTest(){
 
-    const Railways &obj = Railways::railways();
-    assert(&obj == &Railways::railways());
-    assert( 1447 == Railways::railways().GetDistance(Station("Mumbai"),Station("Delhi")));
+    const Railways &obj = Railways::IndianRailways();
+    assert(&obj == &Railways::IndianRailways());
+    assert( 1447 == Railways::IndianRailways().GetDistance(Station("Mumbai"),Station("Delhi")));
 
     stringstream out;
     out << obj;

@@ -45,12 +45,13 @@ void Railways::addDistances(const string&x, const string&y, int distance) {
     sDistStations[make_pair(y, x)] = distance; // y -----> x :distance
 }
 
-
+//distance b/w two stations
 int Railways::GetDistance(const Station &x, const Station &y) const{
     return Railways::sDistStations.at(make_pair(x.GetName(), y.GetName())); 
 }
 
-const Railways &Railways::railways() {
+//returns const instance of railways(Singleton)
+const Railways &Railways::IndianRailways() {
     static const Railways indianRailways; //Local Static Singleton
     return indianRailways;
 }

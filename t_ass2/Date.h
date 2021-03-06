@@ -7,7 +7,7 @@
 #ifndef __DATE_H //Control inclusion of header files
 #define __DATE_H
 
-/************ C++ Headers ******************/
+/************ C++ Project Headers ******************/
 #include <ostream>
 #include<string>
 #include<vector>
@@ -52,8 +52,8 @@ class Date{
 public:
     //CONSTRUCTOR
     //-----------
-    Date(UINT = 1, UINT = 1, UINT = 2021); //ctor
-    Date(const Date &);                    //cctor
+    Date(UINT, UINT, UINT); //ctor
+    Date(const Date &);     //cctor
 
     //DESTRUCTOR
     //---------
@@ -66,6 +66,9 @@ public:
 
     bool operator==(const Date&);
     friend std::ostream &operator<<(std::ostream&,const Date&);
+
+    //UNIT TEST
+    //---------
     static void UnitTest();
 };
 

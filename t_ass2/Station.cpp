@@ -6,37 +6,23 @@
 
 /**************** Project Headers ********************/
 #include "Station.h"
-#include "Railways.h"
+#include "Railways.h" //for accessing master data:distance
 
 using namespace std;
 
 // **** constructors
-Station::Station(const string &x) : name_(x) {
-    #if _DEBUG
-        cout << "Station constructed\n"; 
-    #endif
-}
+Station::Station(const string &x) : name_(x) {}
 Station::Station(const Station&x) : name_(x.name_) {}
 
 // **** destructor
-Station::~Station(){
-    #if _DEBUG
-        cout << "Station destructed\n"; 
-    #endif
-}
-
+Station::~Station(){}
 
 string Station::GetName () const{ 
 	return name_;
 }
 
-
 int Station::GetDistance(const Station& x) const{
-    return Railways::railways().GetDistance(*this,x); //Railway Singleton.GetDistance 
-}
-
-bool Station::operator==(const Station& x){
-    return (name_ == x.name_);
+    return Railways::IndianRailways().GetDistance(*this,x); //Railway Singleton.GetDistance 
 }
 
 ostream& operator<<(ostream& os,const Station& x){

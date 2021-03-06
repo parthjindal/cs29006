@@ -6,13 +6,13 @@
 /*********** Project Headers **************/
 #include "Date.h"
 
-/********** C++ Headers *******************/
+/********** C++ Project Headers *******************/
 #include<ctime>
 
 using namespace std;
 
 Date::Date(unsigned int d, unsigned int m,
-           unsigned int y) : date_(d), month_(Month(m)), year_(y)
+           unsigned int y) : date_(d), month_(Date::Month(m)), year_(y)
 {
     day_ = GetDay();
 }
@@ -27,6 +27,7 @@ Date::Date(const Date &d)
 
 Date::~Date() {}
 
+//returns Day of the week
 Date::Day Date::GetDay(){
     struct tm curr_date = {0, 0, 0, static_cast<int>(date_),
                            static_cast<int>(month_) - 1, static_cast<int>(year_) - 1900};

@@ -6,7 +6,7 @@
 /************ Project Headers *************/
 #include "Booking.h"
 
-/************ C++ Headers *****************/
+/************ C++ Project Headers *****************/
 #include <math.h>
 
 using namespace std;

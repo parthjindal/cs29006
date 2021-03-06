@@ -7,7 +7,7 @@
 #ifndef __STATION_H //Control inclusion of header files
 #define __STATION_H
 
-/************ C++ Headers ************************************/
+/************ C++ Project Headers ************************************/
 #include <string>
 #include<iostream>
 
@@ -15,7 +15,7 @@
 class Station{
 
     const std::string name_;        //name_
-    // Station& operator=(const Station&); //block assignment operator
+    Station& operator=(const Station&); //block assignment operator
 
 public:
 
@@ -28,14 +28,15 @@ public:
     //----------
     ~Station(); //dtor
 
-    //returns Station name_
+    //returns name_
     std::string GetName() const; 
 
     //distance from another station
     int GetDistance(const Station &) const;
-    bool operator==(const Station&);
     friend std::ostream &operator<<(std::ostream &, const Station &);
-    static void UnitTestStation(); //Unit test
+
+    //UNIT TEST
+    static void UnitTestStation();
 };
 
 #endif //__STATION_H

@@ -7,7 +7,7 @@
 #define __BOOKING_CLASS_H
 
 
-/*************C++ Headers **********************/
+/*************C++ Project Headers **********************/
 #include<string>
 #include<iostream>
 
@@ -24,7 +24,9 @@ protected:
     //----------
     virtual ~BookingClass();
 
-    const std::string name_;
+    //ATTRIBUTES
+    //----------
+    const std::string name_; 
     const bool isAC_;  
     const bool isLuxury_;
 
@@ -59,8 +61,8 @@ protected:
     //----------
     virtual ~Seat();
 public:
-    virtual bool isSitting() const;
-    virtual int GetNumberOfTiers() const;
+    virtual bool isSitting() const; // = True
+    virtual int GetNumberOfTiers() const; // = 0
 };
 
 /**********ABSTRACT CLASS Declaration*******************/
@@ -140,7 +142,8 @@ private:
     //CONSTRUCTOR
     //----------
     SecondSitting(const std::string&,bool,bool);
-    
+    SecondSitting(const SecondSitting&) = delete; //block cctor
+    SecondSitting& operator=(const SecondSitting&) = delete; //block operator=
     //DESTRUCTOR
     //----------
     ~SecondSitting();
@@ -160,6 +163,8 @@ private:
     //CONSTRUCTOR
     //----------
     ACFirstClass(const std::string&,bool,bool);
+    ACFirstClass(const ACFirstClass&) = delete; //block cctor
+    ACFirstClass& operator=(const ACFirstClass&) = delete; //block operator=
     
     //DESTRUCTOR
     //----------
@@ -179,6 +184,8 @@ private:
     //CONSTRUCTOR
     //----------
     AC2Tier(const std::string&,bool,bool);
+    AC2Tier(const AC2Tier&) = delete; //block cctor
+    AC2Tier& operator=(const AC2Tier&) = delete; //block operator=
     
     //DESTRUCTOR
     //----------
@@ -198,8 +205,8 @@ private:
     //CONSTRUCTOR
     //----------
     FirstClass(const std::string&,bool,bool);
-    FirstClass(const FirstClass&);            //block cctor
-    FirstClass& operator=(const FirstClass&); //block operator=
+    FirstClass(const FirstClass&) = delete;            //block cctor
+    FirstClass& operator=(const FirstClass&) = delete; //block operator=
     
     //DESTRUCTOR
     //----------
@@ -219,8 +226,8 @@ private:
     //CONSTRUCTOR
     //----------
     AC3Tier(const std::string&,bool,bool);
-    AC3Tier(const AC3Tier&); //block cctor
-    AC3Tier& operator=(const AC3Tier&); //block operator=
+    AC3Tier(const AC3Tier&) = delete; //block cctor
+    AC3Tier& operator=(const AC3Tier&) = delete; //block operator=
     
     //DESTRUCTOR
     //----------
@@ -235,13 +242,13 @@ public:
 /**********CLASS Declaration***************************/
 class Sleeper: public Berth3Tier {
 private:
-    static const double sloadFactor;
+    static const double sloadFactor; 
     
     //CONSTRUCTOR
     //----------
     Sleeper(const std::string&,bool,bool);
-    Sleeper(const Sleeper&); //block cctor
-    Sleeper& operator=(const Sleeper&); //block operator=
+    Sleeper(const Sleeper&) = delete; //block cctor
+    Sleeper& operator=(const Sleeper&) = delete; //block operator=
 
     //DESTRUCTOR
     //----------
