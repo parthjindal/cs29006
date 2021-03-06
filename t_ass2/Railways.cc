@@ -34,9 +34,9 @@ Railways::Railways() {
 }
 
 Railways::~Railways() {
-#if _DEBUG
-    cout << "Railways Destroyed\n";
-#endif // _DEBUG
+    #if _DEBUG
+        cout << "Railways Destroyed\n";
+    #endif // _DEBUG
 }
 
 //Utility function
@@ -53,4 +53,13 @@ int Railways::GetDistance(const Station &x, const Station &y) const{
 const Railways &Railways::railways() {
     static const Railways indianRailways; //Local Static Singleton
     return indianRailways;
+}
+
+ostream& operator<<(ostream& os,const Railways& railway){
+    vector<const Station>::const_iterator it;
+    os << "Indian Railways:\n";
+    for(it = railway.sStations.begin();it != railway.sStations.end();++it){
+        os << " "<< *it << "\n";
+    }
+    return os;
 }

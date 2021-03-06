@@ -40,7 +40,7 @@ class Date{
         Sat,
     };
     typedef unsigned int UINT;
-    Day GetDay(); //returns DOW
+    
     UINT date_; 
     Month month_;
     UINT year_;
@@ -48,6 +48,7 @@ class Date{
 
     Date &operator=(const Date &); //block 'operator='
 
+    Day GetDay(); //returns DOW
 public:
     //CONSTRUCTOR
     //-----------
@@ -64,7 +65,7 @@ public:
     static const std::vector<const std::string> sDays;   //Day Names
 
     friend std::ostream &operator<<(std::ostream&,const Date&);
-    static void UnitTestDate();
+    static void UnitTest();
 };
 
 #endif // __DATE_H

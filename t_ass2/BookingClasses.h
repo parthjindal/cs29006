@@ -116,7 +116,12 @@ private:
     //CONSTRUCTOR
     //----------
     ACChairCar(const std::string&, bool, bool);
-    
+
+    //BLOCKED CONSTRUCTOR
+    //-------------------
+    ACChairCar(const ACChairCar&) = delete; //block cctor
+    ACChairCar& operator=(const ACChairCar&) = delete; //block operator=
+
     //DESTRUCTOR
     //----------
     ~ACChairCar();
@@ -124,7 +129,7 @@ public:
     double GetLoadFactor() const;
     static const ACChairCar& Type();
 
-    static void UnitTestACChairCar();
+    static void UnitTest();
 };
 
 /**********CLASS Declaration***************************/
@@ -143,7 +148,7 @@ public:
     double GetLoadFactor() const;
     static const SecondSitting& Type();
 
-    static void UnitTestSecondSitting();
+    static void UnitTest();
 };
 
 /**********CLASS Declaration***************************/
@@ -163,7 +168,7 @@ public:
     double GetLoadFactor() const;
     static const ACFirstClass& Type();
 
-    static void UnitTestACFirstClass();
+    static void UnitTest();
 };
 
 /**********CLASS Declaration***************************/
@@ -182,7 +187,7 @@ public:
     double GetLoadFactor() const;
     static const AC2Tier& Type();
 
-    static void UnitTestAC2Tier();
+    static void UnitTest();
 };
 
 /**********CLASS Declaration***************************/
@@ -203,7 +208,7 @@ public:
     double GetLoadFactor() const; //Local static const Instance
     static const FirstClass& Type();
 
-    static void UnitTestFirstClass();
+    static void UnitTest();
 };
 
 /**********CLASS Declaration***************************/
@@ -224,7 +229,7 @@ public:
     double GetLoadFactor() const;
     static const AC3Tier& Type();
 
-    static void UnitTestAC3Tier();
+    static void UnitTest();
 };
 
 /**********CLASS Declaration***************************/
@@ -246,7 +251,7 @@ public:
     double GetLoadFactor() const;
     static const Sleeper& Type();
 
-    static void UnitTestSleeper();
+    static void UnitTest();
 };
 
 

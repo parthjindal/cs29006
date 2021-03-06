@@ -35,12 +35,12 @@ class Railways {
 
 public:
 	//returns const instance of Railways
-	const static Railways &railways(); 
+	static const Railways &railways(); 
 
 	//returns distance between two stations
 	int GetDistance(const Station &, const Station &) const;
-	
-	static void UnitTestStation();
+	friend std::ostream& operator<<(std::ostream &,const Railways&);
+	static void UnitTest();
 };
 
 #endif //__RAILWATS_H

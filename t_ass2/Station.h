@@ -15,7 +15,7 @@
 class Station{
 
     const std::string name;        //name
-    Station& operator=(const Station&); //block assignment operator
+    // Station& operator=(const Station&); //block assignment operator
 
 public:
 

@@ -36,13 +36,6 @@ int Station::GetDistance(const Station& x) const{
 }
 
 ostream& operator<<(ostream& os,const Station& x){
-    os <<"Station:" <<x.name;
+    os <<"Station: " <<x.name;
     return os;
-}
-
-//TODO
-void Station::UnitTestStation(){
-    Station s1("Mumbai");
-    Station s2 = s1;
-    std::cout << s2;
 }
