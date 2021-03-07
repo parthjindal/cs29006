@@ -31,8 +31,8 @@ protected:
     std::string bookingMessage_;  //default = "BOOKING SUCCEEDED"
     static int sBookingPNRSerial; //total Booking count
 
-    Booking(const Booking &);            //block cctor
-    Booking &operator=(const Booking &); //block operator=
+    Booking(const Booking &) = delete;            //block cctor
+    Booking &operator=(const Booking &) = delete; //block operator=
 
 public:
     // **** static consts
