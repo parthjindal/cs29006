@@ -1,0 +1,135 @@
+CS20006 Assignment 3
+Testplan.txt
+Parth Jindal,19CS30033
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ UNIT TESTING ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+##### Unit Test Plan for 'Station'
+
+1. Testing the provided constructor : Station(const string &)
+    - Station object is created by passing a string as argument
+
+2. Testing the copy constructor : Station(const Station &)
+    - Copy constructor is called in following cases:
+        - A new Station object is created by passing an existing Station object as argument
+        - A new Station object is created by assigning it to an existing Station object
+
+3. Testing the GetName() function : string GetName() const
+    - Returns the name of the Station
+
+4. Testing the GetDistance() function : int GetDistance(const Station &) const
+    - Returns distance to a Station using a Station object and using masterData of Railways Instance
+
+5. Testing the overloaded output stream operator << : friend ostream &operator<<(ostream&, const Station &)
+    - Check the returned string with the Golden Output("Station: $(NAME_OF_STATION))
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+##### Unit Test Plan for 'Date'
+
+1. Testing the provided constructor : Date(unsigned int,unsigned int,unsigned int)
+    - Date object is created in following scenarios
+        -Test the date object's date_,month_,year_ attributes with given input
+
+2. Testing the copy constructor : Date(const Date&)
+    - Copy constructor is called in following cases:
+        - A new Date object is created by passing an existing Date object as argument
+        - A new Date object is created by assigning it to an existing Date object
+
+3. Testing the day() function : Day Day() const
+    - Gives the day of week of a Date object
+
+4. Testing the overloaded relational operator == : bool operator==(const Date& d)
+    - Checks if all members of Date objects in both sides of the operator are equal
+
+5. Testing the overloaded output stream operator << : friend ostream &operator<<(ostream&, const Date&)
+    - Check the returned string with the Golden Output("$(DAY), $(DATE)/$(MONTH)/$(YEAR)")
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+##### Unit Test Plan for 'Railways'
+
+1. Testing the Type() function : const static Railways &Type()
+    - The Type() function is called to get an object of Railways class
+    - The Type() function is called again and check if it is the same as previous object
+      (testing for singleton class)
+
+2. Testing the GetDistance() function : int GetDistance(const Station &, const Station &)
+    - Gives the distance between two stations
+    - Tested for Station X ----- > Station Y
+    - Tested for Station Y ----- > Station Y
+
+3. Testing the overloaded output stream operator << : friend ostream &operator<<(ostream&, const Railways &)
+    - Check the returned string with the Golden Output("Indian Railways:$(LIST OF STATIONS)")
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#### Unit Test Plan for 'BookingClasses'
+
++++ There are seven concrete classes in BookingClass
+        - ACFirstClass
+        - AC2Tier
+        - FirstClass
+        - AC3Tier
+        - ACChairCar
+        - Sleeper
+        - SecondSitting
+
++++ All of the seven concrete classes are singleton.
+
++++ For each of these classes, the following things need to be tested :
+
+1. Testing the Type() function
+    - The Type() function is called to get an object of the respective booking class
+    - The Type() function is called again and check if it is the same as previous object
+      (testing for singleton class)
+
+2. Testing the isSitting() function : bool isSitting() const
+    - Gives 1 if the booking class is sitting and 0 if it is sleeping
+
+3. Testing the isAC() function : bool isAC() const
+    - Gives 1 if the booking class is AC and 0 if it is non-AC
+
+4. Testing the isLuxury() function : bool isLuxury() const
+    - Gives 1 if the booking class is Luxury and 0 if it is Ordinary
+
+5. Testing the GetNumberOfTiers() function : int GetNumberOfTiers() const
+    - Gives number of tiers in the booking class
+
+6. Testing the GetName() function : string GetName() const
+    - Gives name of the booking class
+
+7. Testing the GetLoadFactor() function : double GetLoadFactor() const
+    - Gives load factor of the booking class
+
+8. Testing the overloaded output stream operator << : friend ostream& operator<<(ostream&, const BookingClass&)
+    - Check the returned String with Golden Output read from its logfile
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+##### Unit Test Plan for 'Booking'
+
+1. Testing the provided constructor : Booking(const Station &, const Station &, const Date &, const BookingClass &,const Passenger* const passenger = NULL`);
+    - Booking object is created in following scenarios
+        - Passenger is a nullable default
+        - All arguments except passenger are provided
+
+2. Testing the ComputeFare() function : virtual int ComputeFare()
+    - Two arbitrary distinct stations are chosen
+    - Tested for booking with ACFirstClass booking class
+    - Tested for booking with AC2Tier booking class
+    - Tested for booking with FirstClass booking class
+    - Tested for booking with AC3Tier booking class
+    - Tested for booking with ACChairCar booking class
+    - Tested for booking with Sleeper booking class
+    - Tested for booking with SecondSitting booking class
+
+3. Testing the overloaded output stream operator << : friend ostream &operator<<(ostream&, const Booking &)
+    - Check the returned string with the Golden Output read from a logfile
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++ APPLICATION TESTING +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Application Test Plan
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
