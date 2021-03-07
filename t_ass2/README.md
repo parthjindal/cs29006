@@ -131,3 +131,10 @@ $ ./test4
 $ g++ -std=c++11 Station.cpp Railways.cpp Date.cpp BookingClasses.cpp Booking.cpp UnitTestBooking.cpp -o test5
 $ ./test5
 ```
+
+## Logfiles for all GoldenOutputs
+
+All logfiles are present in the logs folder
+
+Outputs for `Application.cpp` and `TestApplication.cpp` are in `applicationOutput.txt` and `testApplicationOutput.txt`
+ 
