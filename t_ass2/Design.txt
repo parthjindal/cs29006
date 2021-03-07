@@ -1,0 +1,410 @@
+CS20006 Assignment 3
+Testplan.txt
+Parth Jindal,19CS30033
+
+# Railway Booking System
+
+A railway booking / reservation system designed by **Parth Jindal(19CS30033)** as an assignment in the Software Engineering Theory (CS20006) course.
+
+This document contains guidelines and design preferences followed along with their detailed explainations.
+Common Points:
+1.Copy Constructors :Class(const Class&) and assignment operator: Class& operator=(const Class&)
+  have been made inaccesible wherever not needed.Any use of the above will lead to a compilation error,
+  thus ensuring that all UDT objects are passed and accessed by reference and new objects are created when only necessary.
+
+  Note: Station and Date class have their copy constructors unblocked.
+
+2.All UDT objects are passed by reference so as to minimize memory consumption and avoiding shallow/deep copies.
+
+3.All Singleton Classes are based on Meyer's Singleton design hence giving control to the program of memory management and not the user.
+  Thus all Singleton's have a private constructor/destructor and an getInstance() function to return the static instance of the said classes.
+
+4.All Classes contain friend ostream operator function: ostream& operator<<(ostream&,const Class&),for
+  logging and debugging them.These functions are available in the global namespace.
+
+5.Each Class has a static void UnitTest function defined with a public specifier.
+  These methods are used to perform UnitTests on each component and thus promote a minimal design.
+
+Prior Assumptions:
+    1.All inputs are correct
+    2.No Exception handling provided
+    3.Class Definitions in Header Files.
+    4.Class Implementations in Source Files.
+    5.Unit Testing in Individual Source Files.
+    6.Golden Outputs in 'logs' directory.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+                        "Station" Class
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Data members:
+  private:
+    a)  const string name_
+        Every Station is identified by its name string which
+        remains constant throughout it's lifetime.
+Class methods:
+  public:
+    a)  Station(const std::string &)
+        Constructor of Station Class with only argument of string to initialize its name.
+    
+    b)  Station(const Station&)
+        Copy-Constructor of Station Class
+   
+    c) string GetName() const:
+        Returns name_ string of the Station object.It is a const function as no changes are made in the object's attribute.
+    
+    d) int GetDistance(const Station&) const
+       Returns the distance of 'this' Station from the queried Station using Railways::IndianRailways.GetDistance() function.
+       This function uses the Railway Class's API of GetDistance to return the required value.
+       It is also a 'const' function since no data manipulation is done of the Station object.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+                        "Railways" Class
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Railways is a Singleton Class based on Meyer's architecture.Hence it's constructor and destructor are private.
+It also contains all the master data about list of Stations and their respective distances
+
+Libraries used: map,string,vector,utility,ostream
+Project Headers used: Stations.h
+
+Data members:
+  private:
+    a)  static vector<const Station> sStations
+        It is vector of constant Stations.It is made static private as it remains fixed in all executions of the application throughout its lifetime.
+        It is initialized in the library itself.
+
+    b)  static map<pair<string,string>,int> sDistStations
+        It is a map of pair of Station names to their respective Distances.
+        It is made static and private as it remains constant throughout the lifetime of all runs of the application.
+        It is initialized in the library itself.
+
+Class methods:
+    private:
+    a) void addDistances(string,string,int)
+        It is a utility function used to add all pairs of Stations and their distances into the map sDistStations.
+    
+    b) Railways()
+       Constructor
+    
+    c) ~Railways()
+       destructor
+    
+    public:
+    a) int GetDistance(const Station&,const Station&) const
+       It is a constant function returning the distances from the two given input Stations.
+       It uses the make_pair operation of the utility standard library to query the map:sDistStations and get the value Distances.
+       It is constant as no data is changed of the railway class.
+
+    b) static const Railways& IndianRailways()
+      It returns the const Singleton of the Railways class.
+      When called for the first time it creates a static const instance of Railways class and returns the same in all
+      subsequent calls.
+      Since no data has to be changed by the application of Railways,hence the instance is kept constant.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+                        "Date" Class
+--------------------------------------------------------------------------------------------------------------------------------------------------------   
+
+Date Class is designed to store the date of all operation.
+Libraries used: ostream,string,vector,ctime
+
+Data members:
+    private:
+        a) enum Month:
+            It is an enumeration of all months. Starting from Jan = 1 to Dec =12.
+            Utility enumeration.
+        b) enum Day:
+            It is an enumeration of all day names.Starting from Sun = 0 to Sat = 6.
+            Utility enumeration.
+
+        c) const unsigned int date_:
+            To store day no. of the month.Kept constant as cannot be changed after object creation.
+
+        d) const Month month_:
+            To store month no. of.Kept constant as cannot be changed after object creation.
+
+        e) const unsigned int year_:
+            TO store year no.Kept constant as cannot be changed after object creation.
+        f) Day day_:
+            To store day of the week.
+    
+    public:
+
+        a) static const vector< const string> sMonths
+           It is a const vector of const strings containing month names.It is in the same order as that of the enum Month.
+           It is made static const as it remains sa for all objects of Date class in all runs of the application. and is initialized in the library itself.
+
+        b) static const vector<const string> sDays
+           It is a const vector of const strings containing day names strings.It is in the same order as that of the enum Day. and is used for printing operations.
+           It is made static const as it remains sa for all objects of Date class in all runs of the application. and is initialized in the library itself.
+
+Methods:
+    private:    
+        a) Day GetDay();
+           Returns day of the week using API's of ctime library.
+    public:
+        a) Date(UINT,UINT,UINT)
+           Constructor
+
+        b) Date(const Date&)
+           Copy Constructor
+
+        c) ~Date()
+           destructor
+        
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+                        "Passenger" Class
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+Passenger is an abstract class with few protected data members.
+It is kept for future extensions into the booking interface and other strong/weak aggregations.
+
+Libraries used: string
+
+Project libraries: Date.h
+
+Data members:
+    protected
+    All attributes are kept protected for inheritance into derived polymorphic classes in future
+        a) const string name_
+           Name of the Person
+
+        b) const string aadhar_
+          Aadhar of the Person
+        
+        c) const Date dob_
+          date-of-birth of the Person
+
+        d) const string mobile:
+          mobile-no of the Person
+    
+Class methods:
+    public:
+        a) Passenger(const string&,const string&,const Date&,const string&)
+           Constructor
+        
+        b) virtual ~Passenger()
+           virutal destructor to create polymorphic hierarchy in future based on Category/Gender/Age Group.
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+                        "BookingClasses" Classes
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BookingClasses are a set of hierarchically derived classes with some being abstract and others being concrete.
+It contains the abstract base class BookingClass which acts as the parent and reference class for all other classes.
+The attributes used for defining hierarchy are encoded on methods that are made pure virtual in this class in the hope that the derived class implement them and form the hierarchy.
+whereas those not used in defining hierarchy are made pure attributes of the base class.
+All the 7 concrete classes are Singleton and hence have private constructor and destructor.
+The abstract classes have protected constructor/destructor to instantiate the singleton objects.
+
+Thus It follows the HAS-A principle for the pure attributes with their value based on the polymorphic leaf concrete classes
+While hierarchy defining methods create an IS-A relation for the leaf class to the inherited abstract classes.
+
+Data members:
+    protected:
+    all attributes are made protected to maintain encapsulation and also for the derived classes to inherit them.
+
+    a) const string name_:
+       name of the class.Kept constant
+
+    b) const bool isAC_:
+       constant boolean to represent if the Object has AC or not.
+
+    c) const bool isLuxury_
+      constant boolean to represent if the Object has AC or not.
+
+Class methods:
+    protected:
+        a) BookingClass(const string&, bool, bool)
+           Constructor to set values of the above mentioned attributes.
+           It is kept protected as all derived classes are to be singletons.
+        
+        b) virtual ~BookingClass()
+           Virtual destructor so as to cleanly erase objects from memory and not do slicing.
+            It is kept protected as all derived classes are to be singletons.
+        
+    public:
+        a) string GetName const
+           interface method to return name_ attribute.
+           It is a constant function as no data as being changed of the object
+        
+        b) bool isAC() const
+            interface method to return isAC_ attribute.
+            It is a constant function as no data as being changed of the object
+        
+        c) bool isLuxury() const
+            interface method to return isLuxury_ attribute.
+            It is a constant function as no data as being changed of the object
+        
+        All these three methods and the above mentioned attributes are pure and specific to each class.
+        Hence were not used for defining the hierarchy
+
+        d) virtual bool isSitting() const = 0
+           Pure virtual function.Used to represent if class is of Sitting type or not.
+           Used in defining the hierarchy.
+
+        e) virtual int GetNumberOfTiers() const = 0
+           Pure virtual function.used to represent no. of tiers in class.
+           Used in defining the hierarchy.
+        
+        f) virtual int GetLoadFactor() const = 0
+           Pure virtual function. used to represent loadFactor of a class.
+           It is kept as virtual as all load factors are represented by static consts present in their respective classes which are returned by them.
+
+Since isSitting is an attribute that makes a disjoint hierarchy and is of the most semantic importance among others.
+It is used at the first level to define the hierarchy and hence two abstract subclasses Seat and Berth are formed.
+Both of these subclasses implement virtual bool isSitting() const function with 'Seat' class returning it as 'true'
+and 'Berth' class returning it as 'false'.
+
+Class Seat ----> inherits Class BookingClass
+
+Class methods:
+    protected:
+      a)  Seat(const std::string&, bool, bool);
+        Constructor  calls BookingClass constructor
+      b)  ~Seat()
+         destructor
+    constructor/destructor are protected as derived classes
+
+    public:
+      a) virtual bool isSitting() const = { return true; }
+      Since Seat Classes cannot have tiers,hence GetNumberOfTiers is also set to zero
+
+      b) virtual int GetNumberOfTiers const = { return 0; }
+
+Class Berth ----> inherits Class BookingClass
+
+Class methods:
+    protected:
+      a)  Berth(const std::string&, bool, bool);
+        Constructor calls BookingClass constructor
+      b)  ~Berth()
+         destructor
+    constructor/destructor are protected as derived classes
+
+    public:
+      a) virtual bool isSitting() const = { return false; }
+
+Further Berth can be classified on no. of tiers and hence hierarchy moves forward
+
+Berth2Tier,Berth3Tier is derived from Berth class and have function GetNumberOfTiers set to 2 and 3 respectively.
+
+
+Finally for all concrete classes are derived from Seat,Berth2Tier,Berth3Tier and have to implement GetLoadFactor() function
+Since loadFactor is changeable from time to time all these static consts are to be initialized in Application file and not library.
+Each Concrete class has a static const double loadFactor and GetLoadFactor() returns this constant.
+The final hierarchy looks like this:
+
+                                        BookingClass
+                                     ( abstract base class)
+                                            |
+                                            |
+                                            |
+                                            |
+                            |-------------------------------|
+                            |                               |
+                            |                               |
+                            |                               |
+                          Seat                               Berth    
+                        (abstract)                         (abstract)
+                            |                                |
+                            |                                |
+                            |                                |
+                            |                | ---------------------------|               
+                            |                |                            |  
+                            |                |                            | 
+                            |                |                            |
+                            |                |                            |   
+                            |             Berth2Tier                   Berth3Tier
+                            |             (abstract)                     (abstract)
+                -------------------           |                           |
+                |                  |          |                           | 
+                |                  |          |                           |  
+                |                  |          |                 -------------------            
+             ACChairCar       SecondSitting   |                 |                 |          
+             (concrete)        (concrete)     |                 |                 | 
+                                              |                 |                 |
+                                              |            AC3Tier              Sleeper
+                                              |            (concrete)           (concrete)
+                                ------------------------------------ 
+                                |             |                     |
+                                |             |                     | 
+                                |             |                     |
+                            ACFirstClass      FirstClass         AC2Tier
+                            (concrete)     (concrete)           (concrete)
+
+
+
+Note: Before using BookingClasses all of the static consts must be initialized acc. to the manual or as per wish.
+All these Singelton objects are used as TypeConstants of different BookingClass type and hence have the Type() function returning a const static object of each BookingClass.
+When called once a new object of that class is initialized and after that same obj's reference is returned.
+
+Copy-Constructor and assignment operator are as earlier mentioned blocked to only pass the same static const reference everywhere(TypeConstants).
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+                        "Booking" Classes
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Libraries used: vector,ostream
+Project Headers: Station.h Railways.h BookingClasses.h Date.h Passenger.hierarchy
+
+It is a weak-aggregation for all other classes with the objective to store a booking by a from Station,toStation,date person(future) and BookingClass type.
+It then computes the fare using a predefined business logic.All business logic constants are made static consts and must be initialized by the application and not in library
+They are:
+1 )double sBaseFarePerKM
+2 )double sACSurcharge
+3 )double sLuxuryTaxPercent
+
+To support polymorphism for future new computeLogic extensions,The destructor and ComputeFare functions are kept virtual.
+
+Data members:
+    protected:
+    All data members are kept protected to maintain encapsulation and also to be inherited by derived class
+        a) const Station fromStation_
+           constant Station from where to start.
+        b) const Station toStation_
+           constant Station to end journey.
+        c) const BookingClass& bookingClass_
+           reference to BookingClasses's singleton objects.
+        d) const Date date.
+           constant Date object.
+        e) const Passenger *const passenger_
+           It is a constant pointer to a constant object since it is a weak-aggregation.
+           It is defaulted to NULL here as Passenger is not implemented(future)
+        f) const int PNR_ 
+           unique ID for all bookings
+        g) int fare
+           to be computed by ComputeFare
+        h) bool bookingStatus_
+           set to true here.Not kept as constant as in future extensions status may change from false to true(waiting-confirmed)
+        i) string bookingMessage_
+           set to "BOOKING SUCCEEDED".Not kept as constant as in future extensions status may change "waiting"-"confirmed"
+        j) static int sBookingPNRSerial
+           to keep count of all Bookings.
+    public:
+        a) static const double sBaseFarePerKM;
+        b) static const double sACSurcharge;
+        c) static const double sLuxuryTaxPercent;
+        DISCUSSED ABOVE
+        d) static vector<Booking*> sBookings
+           vector of pointers of all bookings.
+           to be handleded by the application.(pointer removal if booking goes out-of-scope)
+          
+Class methods:
+    public:
+        a) Booking(const Station &, const Station &, const Date &, const BookingClass &,
+            const Passenger *const p = NULL)
+        Constructor
+
+        b) virtual ~Booking()
+            virtual destructor for future
+
+        c) virtual int ComputeFare()
+           returns fare.
+---------------------------------------------------------------------------------------------------------
+                                TESTING
+---------------------------------------------------------------------------------------------------------
+
+All testing is done by maintaing a static UnitTest function in public of all classes with their Implementations
+in a different source file.Golden outputs are mentioned in the logs file.

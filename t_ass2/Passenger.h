@@ -20,7 +20,7 @@ protected:
     const std::string name_;
     const std::string aadhar_;   //aadhar
     const Date dob_;             //date-of-birth
-    mutable std::string mobile_; //mutable for future
+    const std::string mobile_; //const for future
 
 public:
     //CONSTRUCTOR
@@ -30,7 +30,9 @@ public:
 
     //DESTRUCTOR
     //----------
-    virtual ~Passenger() = 0; //pure virtual destructor
+    virtual ~Passenger(); //virtual destructor
+    virtual string GetCategory() = 0; //pure virtual hierarchical method
+    virtual string GetGender() = 0;
 };
 
 #endif // __PASSENGER_H

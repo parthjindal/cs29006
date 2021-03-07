@@ -17,13 +17,8 @@ Date::Date(unsigned int d, unsigned int m,
     day_ = GetDay();
 }
 
-Date::Date(const Date &d)
-{
-    date_ = d.date_;
-    month_ = d.month_;
-    year_ = d.year_;
-    day_ = d.day_;
-}
+Date::Date(const Date &d):date_(d.date_),month_(d.month_),year_(d.year_),day_(d.day_)
+{}
 
 Date::~Date() {}
 

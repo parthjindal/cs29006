@@ -9,9 +9,9 @@
 
 /************ C++ Standard Library Headers ******************/
 #include <ostream>
-#include<string>
-#include<vector>
-
+#include <string>
+#include <vector>
+#include <ctime>
 class Date{
     
     // Month enums
@@ -41,9 +41,9 @@ class Date{
     };
     typedef unsigned int UINT;
     
-    UINT date_; 
-    Month month_;
-    UINT year_;
+    const UINT date_; 
+    const Month month_;
+    const UINT year_;
     Day day_; 
 
     Date &operator=(const Date &); //block 'operator='
