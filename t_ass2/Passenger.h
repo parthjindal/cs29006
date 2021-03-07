@@ -31,8 +31,7 @@ public:
     //DESTRUCTOR
     //----------
     virtual ~Passenger(); //virtual destructor
-    virtual string GetCategory() = 0; //pure virtual hierarchical method
-    virtual string GetGender() = 0;
+    virtual std::string GetCategory() = 0; //pure virtual hierarchical method
 };
 
 #endif // __PASSENGER_H

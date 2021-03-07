@@ -1,5 +1,5 @@
 /*
-  *** Compilation: g++ -std=c++11 UnitTestRailways.cpp Station.cpp Railways.cpp -o test1
+  *** Compilation: g++ -std=c++11 UnitTestRailways.cpp Station.cpp Railways.cpp -o test2
 */
 
 // **** Unit Test:Railway Class

@@ -47,15 +47,14 @@ void Booking::UnitTest()
     // Booking b2(b1);
     vector<Booking*>::iterator it;
 
-    it = find(sBookings.begin(),sBookings.end(),&b1);
-    assert("Kolkata" == b1.fromStation_.GetName()); //Test fromStation()
-    assert("Mumbai" == b1.toStation_.GetName());    //Test ToStation
-    assert(Date(17,3,2021) == b1.date_);            //Test Date
+    it = find(sBookings.begin(), sBookings.end(), &b1);
+    assert("Kolkata" == b1.fromStation_.GetName());         //Test fromStation()
+    assert("Mumbai" == b1.toStation_.GetName());            //Test ToStation
+    assert(Date(17, 3, 2021) == b1.date_);                  //Test Date
     assert("AC First Class" == b1.bookingClass_.GetName()); //Test BookingClass
-    assert(1 == b1.PNR_);                           //Test PNR(must start from 1)
-    assert(3839 == b1.fare_ );                      
-    assert(sBookings.end() != it);                  //Test if Booking is stored in sBookings or not
-
+    assert(1 == b1.PNR_);                                   //Test PNR(must start from 1)
+    assert(3839 == b1.fare_);
+    assert(sBookings.end() != it); //Test if Booking is stored in sBookings or not
 
     //Test Compute Fare(acc.to business logic)
     assert(3839 == b1.ComputeFare());

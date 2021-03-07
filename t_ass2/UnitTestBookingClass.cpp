@@ -1,5 +1,5 @@
 /*
-  *** Compilation: g++ -std=c++11 UnitTestBookingClass.cpp BookingClass.cpp -o test4
+  *** Compilation: g++ -std=c++11 UnitTestBookingClass.cpp BookingClasses.cpp -o test4
 */
 
 // **** Unit Test:BookingClasses

@@ -23,6 +23,12 @@ Parth Jindal,19CS30033
 5. Testing the overloaded output stream operator << : friend ostream &operator<<(ostream&, const Station &)
     - Check the returned string with the Golden Output("Station: $(NAME_OF_STATION))
 
+GOLDEN OUTPUTS:
+
+Mumbai
+1447
+Station: Mumbai
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ##### Unit Test Plan for 'Date'
 
@@ -44,6 +50,13 @@ Parth Jindal,19CS30033
 5. Testing the overloaded output stream operator << : friend ostream &operator<<(ostream&, const Date&)
     - Check the returned string with the Golden Output("$(DAY), $(DATE)/$(MONTH)/$(YEAR)")
 
+GOLDEN OUTPUTS:
+
+11
+Mar
+2001
+Sun, 11/Mar/2001
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ##### Unit Test Plan for 'Railways'
@@ -60,6 +73,17 @@ Parth Jindal,19CS30033
 
 3. Testing the overloaded output stream operator << : friend ostream &operator<<(ostream&, const Railways &)
     - Check the returned string with the Golden Output("Indian Railways:$(LIST OF STATIONS)")
+
+GOLDEN OUTPUTS:
+
+1447
+1447
+Indian Railways:
+ Station: Mumbai
+ Station: Delhi
+ Station: Kolkata
+ Station: Bangalore
+ Station: Chennai
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -104,6 +128,10 @@ Parth Jindal,19CS30033
 8. Testing the overloaded output stream operator << : friend ostream& operator<<(ostream&, const BookingClass&)
     - Check the returned String with Golden Output read from its logfile
 
+GOLDEN OUTPUTS:
+
+Mentioned in the logs dir.
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ##### Unit Test Plan for 'Booking'
@@ -126,10 +154,23 @@ Parth Jindal,19CS30033
 3. Testing the overloaded output stream operator << : friend ostream &operator<<(ostream&, const Booking &)
     - Check the returned string with the Golden Output read from a logfile
 
+GOLDEN OUTPUTS:
+
+Mentioned in the logs dir.
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ APPLICATION TESTING +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Application Test Plan
+In Application test all units are tested together with their public interfaces.
+
+1. Instantiate Station classes
+
+2. Create Dates using its default constructor
+
+3. Create bookings for all BookingClass Types.
+
+4. Use Railways::Instance to extract distance for any two stations.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

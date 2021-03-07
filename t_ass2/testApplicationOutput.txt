@@ -1,0 +1,165 @@
+Booking - 1
+Station: Delhi ------> Station: Mumbai === 1447 km
+
+BOOKING SUCCEEDED:
+PNR Number = 1
+From Station = Delhi
+To Station = Mumbai
+Travel Date = Wed, 2/Nov/2011
+Travel Class = AC First Class
+ : Mode: Sleeping
+ : Comfort: AC
+ : Bunks: 2
+ : Luxury: Yes
+Fare = 2776
+
+Booking - 2
+Station: Bangalore ------> Station: Chennai === 350 km
+
+BOOKING SUCCEEDED:
+PNR Number = 2
+From Station = Bangalore
+To Station = Chennai
+Travel Date = Fri, 29/Mar/2002
+Travel Class = AC 2 Tier
+ : Mode: Sleeping
+ : Comfort: AC
+ : Bunks: 2
+ : Luxury: No
+Fare = 400
+
+Booking - 3
+Station: Kolkata ------> Station: Mumbai === 2014 km
+
+BOOKING SUCCEEDED:
+PNR Number = 3
+From Station = Kolkata
+To Station = Mumbai
+Travel Date = Wed, 13/Apr/2022
+Travel Class = First Class
+ : Mode: Sleeping
+ : Comfort: Non-AC
+ : Bunks: 2
+ : Luxury: Yes
+Fare = 2518
+
+Booking - 4
+Station: Delhi ------> Station: Bangalore === 2150 km
+
+BOOKING SUCCEEDED:
+PNR Number = 4
+From Station = Delhi
+To Station = Bangalore
+Travel Date = Mon, 15/Apr/2019
+Travel Class = AC 3 Tier
+ : Mode: Sleeping
+ : Comfort: AC
+ : Bunks: 3
+ : Luxury: No
+Fare = 1931
+
+Booking - 5
+Station: Chennai ------> Station: Mumbai === 1338 km
+
+BOOKING SUCCEEDED:
+PNR Number = 5
+From Station = Chennai
+To Station = Mumbai
+Travel Date = Sun, 15/Aug/2021
+Travel Class = AC Chair Car
+ : Mode: Sitting
+ : Comfort: AC
+ : Bunks: 0
+ : Luxury: No
+Fare = 886
+
+Booking - 6
+Station: Chennai ------> Station: Delhi === 2180 km
+
+BOOKING SUCCEEDED:
+PNR Number = 6
+From Station = Chennai
+To Station = Delhi
+Travel Date = Sun, 1/Aug/2010
+Travel Class = Sleeper
+ : Mode: Sleeping
+ : Comfort: Non-AC
+ : Bunks: 3
+ : Luxury: No
+Fare = 1090
+
+Booking - 7
+Station: Bangalore ------> Station: Kolkata === 1871 km
+
+BOOKING SUCCEEDED:
+PNR Number = 7
+From Station = Bangalore
+To Station = Kolkata
+Travel Date = Sun, 11/Mar/2001
+Travel Class = Second Sitting
+ : Mode: Sitting
+ : Comfort: Non-AC
+ : Bunks: 0
+ : Luxury: No
+Fare = 468
+
+Booking - 8
+Station: Kolkata ------> Station: Delhi === 1472 km
+
+BOOKING SUCCEEDED:
+PNR Number = 8
+From Station = Kolkata
+To Station = Delhi
+Travel Date = Fri, 29/Mar/2002
+Travel Class = Sleeper
+ : Mode: Sleeping
+ : Comfort: Non-AC
+ : Bunks: 3
+ : Luxury: No
+Fare = 736
+
+Booking - 9
+Station: Kolkata ------> Station: Delhi === 1472 km
+
+BOOKING SUCCEEDED:
+PNR Number = 9
+From Station = Kolkata
+To Station = Delhi
+Travel Date = Sun, 11/Mar/2001
+Travel Class = First Class
+ : Mode: Sleeping
+ : Comfort: Non-AC
+ : Bunks: 2
+ : Luxury: Yes
+Fare = 1840
+
+Booking - 10
+Station: Bangalore ------> Station: Mumbai === 981 km
+
+BOOKING SUCCEEDED:
+PNR Number = 10
+From Station = Bangalore
+To Station = Mumbai
+Travel Date = Mon, 15/Apr/2019
+Travel Class = AC First Class
+ : Mode: Sleeping
+ : Comfort: AC
+ : Bunks: 2
+ : Luxury: Yes
+Fare = 1902
+
+Booking - 11
+Station: Bangalore ------> Station: Chennai === 350 km
+
+BOOKING SUCCEEDED:
+PNR Number = 11
+From Station = Bangalore
+To Station = Chennai
+Travel Date = Sun, 1/Aug/2010
+Travel Class = AC 2 Tier
+ : Mode: Sleeping
+ : Comfort: AC
+ : Bunks: 2
+ : Luxury: No
+Fare = 400
+

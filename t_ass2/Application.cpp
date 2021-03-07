@@ -1,5 +1,16 @@
+// **** Author:Parth Jindal
+// **** Version:1.0
+// **** Roll No.: 7/Mar/2021
+
+/******************************* Project Headers**********************************/
+#include "Booking.h"
+#include "Station.h"
+#include "Railways.h"
+#include "Passenger.h"
+#include "BookingClasses.h"
 #include "Booking.h"
 
+// **** static consts
 const double Booking::sBaseFarePerKM = 0.50;
 const double Booking::sACSurcharge = 50.00;
 const double Booking::sLuxuryTaxPercent = 0.25;
@@ -26,8 +37,7 @@ void TestApplication(){
     Booking b8(Station("Delhi"), Station("Mumbai"), Date(22, 5, 2021), SecondSitting::Type());
 
     vector<Booking *>::iterator it;
-    for (it = Booking::sBookings.begin(); it < Booking::sBookings.end(); ++it)
-    {
+    for (it = Booking::sBookings.begin(); it < Booking::sBookings.end(); ++it){
         cout << *(*it) << "\n\n";
     }
 }

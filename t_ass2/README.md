@@ -70,13 +70,13 @@ A simple makefile to compile and build the project.
 
 ## Compiler Used
 
-GNU GCC compiler used.\n
+GNU GCC compiler used.
 C++11 Standard followed.
 
 
 ## Compilation and Build Instructions
 
-To compile and build the project, ensure all the above listed files are in the same directory. Then navigate to that directory and run the following commands in the terminal:
+To compile and build the project, ensure all the above listed files are in the same directory.(logfiles to be kept in logs dir).Then navigate to that directory and run the following commands in the terminal:
 
 ```shell
 $ make
@@ -88,10 +88,10 @@ To clean the directory of the object files and executable,run the following comm
 $ make clean
 ```
 
-Note that by default, the application file selected is `Application.cpp`. To change this, just pass the name of the application file which you want to use (without the .cpp extension) as an argument to the `make` command. For example, if we want to use the file `ApplicationTest.cpp` as the application file, use the commands :
+Note that by default, the application file selected is `Application.cpp`. To change this, just pass the name of the application file which you want to use (without the .cpp extension) as an argument to the `make` command. For example, if we want to use the file `TestApplication.cpp` as the application file, use the commands :
 
 ```shell
-$ make APPFILE=ApplicationTest
+$ make APPFILE=TestApplication
 $ ./main
 ```
 
