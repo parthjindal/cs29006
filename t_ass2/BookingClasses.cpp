@@ -17,7 +17,8 @@ BookingClass::BookingClass(const string &name,
 // **** Destructor
 BookingClass::~BookingClass() {}
 
-// **** member functions
+// member functions
+//-----------------
 string BookingClass::GetName() const{ return name_;}
 bool BookingClass::isAc() const{ return isAC_; }
 bool BookingClass::isLuxury() const{ return isLuxury_; }
@@ -43,7 +44,8 @@ Seat::Seat(const string &name, bool isAC,
 // **** destructor
 Seat::~Seat() {}
 
-// **** member functions
+// member functions
+//----------------- 
 bool Seat::isSitting() const{ return true; }
 int Seat::GetNumberOfTiers() const{ return 0; }
 
@@ -56,7 +58,7 @@ Berth::Berth(const string &name, bool isAC,
 // **** destructor
 Berth::~Berth() {}
 
-// **** member functions
+// **** member function
 bool Berth::isSitting() const{ return false; }
 
 /********************* BERTH-2-TIER CLASS ******************/
@@ -67,7 +69,7 @@ Berth2Tier::Berth2Tier(const string &name, bool isAC,
 // *** destructor
 Berth2Tier::~Berth2Tier() {}
 
-// **** member functions
+// returns tier no.s
 int Berth2Tier::GetNumberOfTiers() const { return 2; }
 
 /********************* BERTH-3-TIER CLASS *****************/
@@ -78,7 +80,7 @@ Berth3Tier::Berth3Tier(const string &name, bool isAC,
 // **** destructor
 Berth3Tier::~Berth3Tier() {}
 
-// **** member functions
+// returns tier no.s
 int Berth3Tier::GetNumberOfTiers() const { return 3; }
 
 /********************* AC CHAIR CAR CLASS *****************/
@@ -96,7 +98,7 @@ const ACChairCar &ACChairCar::Type(){
     return obj;
 }
 
-// **** member functions
+// returns loadFactor
 double ACChairCar::GetLoadFactor() const { return sloadFactor; }
 
 /********************* SECOND SITTING CLASS ***************/
@@ -145,7 +147,7 @@ const AC2Tier &AC2Tier::Type(){
     const static AC2Tier obj("AC 2 Tier", true, false);
     return obj;
 }
-// **** member functions
+// returns loadFactor
 double AC2Tier::GetLoadFactor() const { return sloadFactor; }
 
 /********************* 'FIRST CLASS' CLASS **************/
@@ -161,7 +163,7 @@ const FirstClass &FirstClass::Type(){
     const static FirstClass obj("First Class", false, true);
     return obj;
 }
-// **** member functions
+// returns loadFactor
 double FirstClass::GetLoadFactor() const { return sloadFactor; }
 
 /********************* AC 3 TIER CLASS **************/
@@ -177,7 +179,7 @@ const AC3Tier &AC3Tier::Type(){
     const static AC3Tier obj("AC 3 Tier", true, false);
     return obj;
 }
-// **** member functions
+// returns loadFactor
 double AC3Tier::GetLoadFactor() const { return sloadFactor; }
 
 /********************* SLEEPER CLASS *****************/
@@ -193,5 +195,5 @@ const Sleeper &Sleeper::Type(){
     const static Sleeper obj("Sleeper", false, false);
     return obj;
 }
-// **** member functions
+// returns loadFactor
 double Sleeper::GetLoadFactor() const { return sloadFactor; }

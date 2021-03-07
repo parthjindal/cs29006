@@ -2,6 +2,7 @@
 #include<iostream>
 #include<cassert>
 #include<sstream>
+#include<fstream>
 
 using namespace std;
 
@@ -22,6 +23,18 @@ void ACChairCar::UnitTest(){
     assert(true == ACChairCar::Type().isSitting());
     assert(1.25 == ACChairCar::Type().GetLoadFactor());
     assert(0 == ACChairCar::Type().GetNumberOfTiers());
+
+    //TESTING WITH GOLDEN OUTPUTS
+    ifstream log("logs/ACCHairCar.log");
+    if(log){
+        stringstream expectedOut,out;
+        expectedOut << log.rdbuf();
+        out << ACChairCar::Type();
+        assert(out.str() == expectedOut.str());
+    }else{
+        cout << "LogFile Not Found";
+        exit(1);
+    }
 }
 
 void SecondSitting::UnitTest(){
@@ -31,6 +44,18 @@ void SecondSitting::UnitTest(){
     assert(true == SecondSitting::Type().isSitting());
     assert(0.5 == SecondSitting::Type().GetLoadFactor());
     assert(0 == SecondSitting::Type().GetNumberOfTiers());
+
+    //TESTING WITH GOLDEN OUTPUTS
+    ifstream log("logs/SecondSitting.log");
+    if(log){
+        stringstream expectedOut,out;
+        expectedOut << log.rdbuf();
+        out << SecondSitting::Type();
+        assert(out.str() == expectedOut.str());
+    }else{
+        cout << "LogFile: SecondSitting.log Not Found";
+        exit(1);
+    }
 }
 
 void ACFirstClass::UnitTest(){
@@ -40,6 +65,18 @@ void ACFirstClass::UnitTest(){
     assert(false == ACFirstClass::Type().isSitting());
     assert(3 == ACFirstClass::Type().GetLoadFactor());
     assert(2 == ACFirstClass::Type().GetNumberOfTiers());
+    
+    //TESTING WITH GOLDEN OUTPUTS
+    ifstream log("logs/ACFirstClass.log");
+    if(log){
+        stringstream expectedOut,out;
+        expectedOut << log.rdbuf();
+        out << ACFirstClass::Type();
+        assert(out.str() == expectedOut.str());
+    }else{
+        cout << "LogFile: ACFirstClass.log Not Found";
+        exit(1);
+    }
 }
 
 void AC2Tier::UnitTest(){
@@ -49,6 +86,19 @@ void AC2Tier::UnitTest(){
     assert(false == AC2Tier::Type().isSitting());
     assert(2.00 == AC2Tier::Type().GetLoadFactor());
     assert(2 == AC2Tier::Type().GetNumberOfTiers());
+
+    //TESTING WITH GOLDEN OUTPUTS
+    ifstream log("logs/AC2Tier.log");
+    if(log){
+        stringstream expectedOut,out;
+        expectedOut << log.rdbuf();
+        out << AC2Tier::Type();
+        assert(out.str() == expectedOut.str());
+    }else{
+        cout << "LogFile: AC2Tier.log Not Found";
+        exit(1);
+    }
+
 }
 
 void FirstClass::UnitTest(){
@@ -58,6 +108,18 @@ void FirstClass::UnitTest(){
     assert(false == FirstClass::Type().isSitting());
     assert(2.00 == FirstClass::Type().GetLoadFactor());
     assert(2 == FirstClass::Type().GetNumberOfTiers());
+
+    //TESTING WITH GOLDEN OUTPUTS
+    ifstream log("logs/FirstClass.log");
+    if(log){
+        stringstream expectedOut,out;
+        expectedOut << log.rdbuf();
+        out << FirstClass::Type();
+        assert(out.str() == expectedOut.str());
+    }else{
+        cout << "LogFile: FirstClass.log Not Found";
+        exit(1);
+    }
 }
 
 void AC3Tier::UnitTest(){
@@ -67,6 +129,18 @@ void AC3Tier::UnitTest(){
     assert(false == AC3Tier::Type().isSitting());
     assert(1.75 == AC3Tier::Type().GetLoadFactor());
     assert(3 == AC3Tier::Type().GetNumberOfTiers());
+
+    //TESTING WITH GOLDEN OUTPUTS
+    ifstream log("logs/AC3Tier.log");
+    if(log){
+        stringstream expectedOut,out;
+        expectedOut << log.rdbuf();
+        out << AC3Tier::Type();
+        assert(out.str() == expectedOut.str());
+    }else{
+        cout << "LogFile: AC3Tier.log Not Found";
+        exit(1);
+    }
 }
 void Sleeper::UnitTest(){
     assert(false== Sleeper::Type().isAc());
@@ -75,12 +149,23 @@ void Sleeper::UnitTest(){
     assert(false == Sleeper::Type().isSitting());
     assert(1.00 == Sleeper::Type().GetLoadFactor());
     assert(3 == Sleeper::Type().GetNumberOfTiers());
+
+    //TESTING WITH GOLDEN OUTPUTS
+    ifstream log("logs/Sleeper.log");
+    if(log){
+        stringstream expectedOut,out;
+        expectedOut << log.rdbuf();
+        out << Sleeper::Type();
+        assert(out.str() == expectedOut.str());
+    }else{
+        cout << "LogFile: Sleeper.log Not Found";
+        exit(1);
+    }
 }
 
 
 int main(){
     
-    //TESTING WITH GOLDEN OUTPUTS
     ACChairCar::UnitTest(); 
     SecondSitting::UnitTest();
     ACFirstClass::UnitTest();
@@ -88,4 +173,6 @@ int main(){
     FirstClass::UnitTest();
     AC3Tier::UnitTest();
     Sleeper::UnitTest();
+
+    return 0;
 }

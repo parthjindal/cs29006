@@ -29,7 +29,7 @@ void Station::UnitTest(){
     stringstream out;
     out << m;
     string gOutput = "Station: Mumbai";
-    assert(gOutput == out.str()); // Test operator<<
+    assert(gOutput == out.str()); // Test operator<< with Golden output
 }
 
 int main(){

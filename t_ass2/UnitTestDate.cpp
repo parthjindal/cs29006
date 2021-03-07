@@ -20,19 +20,19 @@ using namespace std;
 void Date::UnitTest(){
 
     Date d1(11, 03, 2001); //ctor
-    Date d2(d1)            //cctor
+    Date d2(d1);            //cctor
 
-    assert(d1 == d2) //Test operator==
+    assert(d1 == d2); //Test operator==
 
     //Test Constructed object with given values
-    assert(11 == d.date_);
-    assert(Date::Month::Mar == d.month_);
-    assert(2001 == d.year_);
+    assert(11 == d1.date_);
+    assert(Date::Month::Mar == d1.month_);
+    assert(2001 == d1.year_);
 
-    assert(Date::Day::Sun == d.GetDay()); //Test GetDay()
+    assert(Date::Day::Sun == d1.GetDay()); //Test GetDay()
      
     stringstream out;
-    out << d;
+    out << d1;
     assert("Sun, 11/Mar/2001" == out.str()); //Test operator<< with Golden Output
 }
 
