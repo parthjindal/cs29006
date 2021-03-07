@@ -6,14 +6,14 @@
 #ifndef __BOOKING_H //Control inclusion of header files
 #define __BOOKING_H
 
-/***************** Project Headers ****************/
-#include "Station.h" 
+/***************** Project Headers **********************************/
+#include "Station.h"
 #include "Railways.h"
 #include "BookingClasses.h"
 #include "Date.h"
 #include "Passenger.h"
 
-/***************** C++ Project Headers ********************/
+/***************** C++ Standard Library Headers ********************/
 #include <vector>
 #include <ostream>
 
@@ -24,11 +24,11 @@ protected:
     const Station toStation_;
     const BookingClass &bookingClass_; //static BookingClass obj
     const Date date_;                  //Date of booking
-    const Passenger *const passenger_; //Set to default(for future)
+    const Passenger *const passenger_; //Set to NULL(for future)
     const int PNR_;
     int fare_;
-    bool bookingStatus_; //set to true
-    std::string bookingMessage_;
+    bool bookingStatus_;          //set to true
+    std::string bookingMessage_;  //default = "BOOKING SUCCEEDED"
     static int sBookingPNRSerial; //total Booking count
 
     Booking(const Booking &);            //block cctor
@@ -36,7 +36,7 @@ protected:
 
 public:
     // **** static consts
-    static const double sBaseFarePerKM; 
+    static const double sBaseFarePerKM;
     static const double sACSurcharge;
     static const double sLuxuryTaxPercent;
 
@@ -49,10 +49,13 @@ public:
     //----------
     virtual ~Booking();
 
-    virtual int ComputeFare();                     //virtual(future extension ?)
-    static std::vector<const Booking *> sBookings; //Booking* array
+    virtual int ComputeFare();               //virtual(future extension ?)
+    static std::vector<Booking *> sBookings; //Booking* array
     friend std::ostream &operator<<(std::ostream &, const Booking &);
+
+    //UNIT TEST
+    //---------
     static void UnitTest();
 };
 
-#endif
+#endif // __BOOKING_H

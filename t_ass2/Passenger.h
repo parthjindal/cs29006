@@ -10,7 +10,7 @@
 /************** Project Headers ***************/
 #include "Date.h"
 
-/************** C++ Project Headers *******************/
+/************** C++ Standard Library Headers *******************/
 #include <string>
 
 /*************** ABSTRACT CLASS ***************/

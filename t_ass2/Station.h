@@ -7,7 +7,7 @@
 #ifndef __STATION_H //Control inclusion of header files
 #define __STATION_H
 
-/************ C++ Project Headers ************************************/
+/************ C++ Standard Library Headers ************************************/
 #include <string>
 #include<iostream>
 
@@ -36,7 +36,7 @@ public:
     friend std::ostream &operator<<(std::ostream &, const Station &);
 
     //UNIT TEST
-    static void UnitTestStation();
+    static void UnitTest();
 };
 
 #endif //__STATION_H

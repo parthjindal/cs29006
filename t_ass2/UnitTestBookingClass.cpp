@@ -80,7 +80,8 @@ void Sleeper::UnitTest(){
 
 int main(){
     
-    ACChairCar::UnitTest();
+    //TESTING WITH GOLDEN OUTPUTS
+    ACChairCar::UnitTest(); 
     SecondSitting::UnitTest();
     ACFirstClass::UnitTest();
     AC2Tier::UnitTest();

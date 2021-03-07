@@ -7,7 +7,7 @@
 #define __BOOKING_CLASS_H
 
 
-/*************C++ Project Headers **********************/
+/*************C++ Standard Library Headers **********************/
 #include<string>
 #include<iostream>
 

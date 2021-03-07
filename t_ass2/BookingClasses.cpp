@@ -1,8 +1,14 @@
+// **** BookingClass class implementaion
+// **** Author: Parth Jindal
+// **** Date: 1 March 2021
+// **** Roll no.: 19CS30033
+
+/***************** Project Headers *******************************/
 #include "BookingClasses.h"
 
 using namespace std;
 
-/******************** BOOKING CLASS *************************************/
+/******************** BOOKING CLASS *******************************/
 
 // **** constructor
 BookingClass::BookingClass(const string &name,
@@ -28,7 +34,7 @@ ostream &operator<<(ostream &os, const BookingClass &x){
     return os;
 }
 
-/********************** SEAT CLASS *********************/
+/********************** SEAT CLASS *****************************/
 
 // **** constructor
 Seat::Seat(const string &name, bool isAC,
@@ -41,7 +47,7 @@ Seat::~Seat() {}
 bool Seat::isSitting() const{ return true; }
 int Seat::GetNumberOfTiers() const{ return 0; }
 
-/********************** BERTH CLASS *********************/
+/********************** BERTH CLASS **************************/
 
 // **** constructor
 Berth::Berth(const string &name, bool isAC,
@@ -53,7 +59,7 @@ Berth::~Berth() {}
 // **** member functions
 bool Berth::isSitting() const{ return false; }
 
-/********************* BERTH-2-TIER CLASS **************/
+/********************* BERTH-2-TIER CLASS ******************/
 
 // **** constructor
 Berth2Tier::Berth2Tier(const string &name, bool isAC,
@@ -64,7 +70,7 @@ Berth2Tier::~Berth2Tier() {}
 // **** member functions
 int Berth2Tier::GetNumberOfTiers() const { return 2; }
 
-/********************* BERTH-3-TIER CLASS **************/
+/********************* BERTH-3-TIER CLASS *****************/
 
 // **** constructor
 Berth3Tier::Berth3Tier(const string &name, bool isAC,
@@ -75,7 +81,7 @@ Berth3Tier::~Berth3Tier() {}
 // **** member functions
 int Berth3Tier::GetNumberOfTiers() const { return 3; }
 
-/********************* AC CHAIR CAR CLASS **************/
+/********************* AC CHAIR CAR CLASS *****************/
 
 // **** constructor
 ACChairCar::ACChairCar(const string &name, bool isAC,
@@ -85,6 +91,7 @@ ACChairCar::~ACChairCar() {}
 
 // returns const instance(static)
 const ACChairCar &ACChairCar::Type(){
+    // _MEYER_SINGLETON
     const static ACChairCar obj("AC Chair Car", true, false); //local static instance
     return obj;
 }
@@ -92,7 +99,7 @@ const ACChairCar &ACChairCar::Type(){
 // **** member functions
 double ACChairCar::GetLoadFactor() const { return sloadFactor; }
 
-/********************* SECOND SITTING CLASS **************/
+/********************* SECOND SITTING CLASS ***************/
 // **** constructor
 SecondSitting::SecondSitting(const string &name, bool isAC,
                              bool isLuxury) : Seat(name, isAC, isLuxury) {}
@@ -101,6 +108,7 @@ SecondSitting::~SecondSitting() {}
 
 // returns const instance(static)
 const SecondSitting &SecondSitting::Type(){
+    // _MEYER_SINGLETON
     const static SecondSitting obj("Second Sitting", false, false);
     return obj;
 }
@@ -115,53 +123,75 @@ ACFirstClass::ACFirstClass(const string &name, bool isAC,
 // **** destructor
 ACFirstClass::~ACFirstClass() {}
 
-
+// returns const instance(static)
 const ACFirstClass &ACFirstClass::Type(){
+    // _MEYER_SINGLETON
     const static ACFirstClass obj("AC First Class", true, true);
     return obj;
 }
-
+// **** member function
 double ACFirstClass::GetLoadFactor() const { return sloadFactor; }
 
-AC2Tier::AC2Tier(const string &name, bool isAC, bool isLuxury) : Berth2Tier(name, isAC, isLuxury) {}
+/********************* AC 2 TIER CLASS **************/
+// **** constructor
+AC2Tier::AC2Tier(const string &name, bool isAC,
+                 bool isLuxury) : Berth2Tier(name, isAC, isLuxury) {}
+// **** destructor
 AC2Tier::~AC2Tier() {}
 
-const AC2Tier &AC2Tier::Type()
-{
+// returns const instance(static)
+const AC2Tier &AC2Tier::Type(){
+    // _MEYER_SINGLETON
     const static AC2Tier obj("AC 2 Tier", true, false);
     return obj;
 }
-
+// **** member functions
 double AC2Tier::GetLoadFactor() const { return sloadFactor; }
 
-FirstClass::FirstClass(const string &name, bool isAC, bool isLuxury) : Berth2Tier(name, isAC, isLuxury) {}
+/********************* 'FIRST CLASS' CLASS **************/
+// **** constructor
+FirstClass::FirstClass(const string &name, bool isAC,
+                       bool isLuxury) : Berth2Tier(name, isAC, isLuxury) {}
+// **** destructor
 FirstClass::~FirstClass() {}
 
-const FirstClass &FirstClass::Type()
-{
+// returns const instance(static)
+const FirstClass &FirstClass::Type(){
+    // _MEYER_SINGLETON
     const static FirstClass obj("First Class", false, true);
     return obj;
 }
+// **** member functions
 double FirstClass::GetLoadFactor() const { return sloadFactor; }
 
-AC3Tier::AC3Tier(const string &name, bool isAC, bool isLuxury) : Berth3Tier(name, isAC, isLuxury) {}
+/********************* AC 3 TIER CLASS **************/
+// **** constructor
+AC3Tier::AC3Tier(const string &name, bool isAC,
+                 bool isLuxury) : Berth3Tier(name, isAC, isLuxury) {}
+// **** destructor
 AC3Tier::~AC3Tier() {}
 
-const AC3Tier &AC3Tier::Type()
-{
+// returns const instance(static)
+const AC3Tier &AC3Tier::Type(){
+    // _MEYER_SINGLETON
     const static AC3Tier obj("AC 3 Tier", true, false);
     return obj;
 }
-
+// **** member functions
 double AC3Tier::GetLoadFactor() const { return sloadFactor; }
 
-Sleeper::Sleeper(const string &name, bool isAC, bool isLuxury) : Berth3Tier(name, isAC, isLuxury) {}
+/********************* SLEEPER CLASS *****************/
+// **** constructor
+Sleeper::Sleeper(const string &name, bool isAC,
+                 bool isLuxury) : Berth3Tier(name, isAC, isLuxury) {}
+// **** destructor
 Sleeper::~Sleeper() {}
 
-const Sleeper &Sleeper::Type()
-{
+//  returns const instance(static)
+const Sleeper &Sleeper::Type(){
+    // _MEYER_SINGLETON
     const static Sleeper obj("Sleeper", false, false);
     return obj;
 }
-
+// **** member functions
 double Sleeper::GetLoadFactor() const { return sloadFactor; }

@@ -7,7 +7,7 @@
 #ifndef __DATE_H //Control inclusion of header files
 #define __DATE_H
 
-/************ C++ Project Headers ******************/
+/************ C++ Standard Library Headers ******************/
 #include <ostream>
 #include<string>
 #include<vector>
